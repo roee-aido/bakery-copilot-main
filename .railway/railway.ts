@@ -7,7 +7,7 @@
 import { defineRailway, github, postgres, project, service, volume } from "railway/iac";
 
 export default defineRailway(() => {
-  const bakeryCopilot = github("MaceTenth/bakery-copilot");
+  const bakeryCopilot = github("roee-aido/bakery-copilot-main");
 
   const Postgres = postgres("Postgres", { region: "iad" });
   Postgres.networking = { privateNetworkEndpoint: "postgres" };
