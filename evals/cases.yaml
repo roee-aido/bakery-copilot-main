@@ -1,84 +1,96 @@
-# Eval cases for Bakery Copilot. Each case is one user turn against a fresh,
-# seeded database. Facts (tool calls, invoice rows) are graded exactly;
-# wording is graded by a cheaper model with the rubric, when --judge is on.
+# Eval cases for the GeoChronos Time-Travel Concierge. Each case is one user turn against a fresh,
+# seeded database. Facts (tool calls, saved trip requests) are graded exactly; wording is graded by a
+# cheaper model with the rubric, when --judge is on. Needs the real model and ANTHROPIC_API_KEY.
 #
 # Grow this file from real chats: every surprise becomes a case.
 
-- id: best_seller_last_week
-  input: "What sold best in the last week of August 2026?"
+- id: site_dating_range
+  input: "When was the Great Pyramid of Giza built?"
   expect:
-    tools_called: [sales_query]
-    answer_contains_any: ["Challah", "Croissant", "Cappuccino", "Pita", "Rugelach", "Bourekas", "Baguette", "Cookies"]
-    no_invoice_rows: true
-  rubric: "Leads with the product and a number, states the date range used, under 150 words."
+    tools_called: [site_timeline]
+    answer_contains_any: ["BC", "BCE"]
+    answer_not_contains: ["definitely", "exactly in"]
+    no_trip_rows: true
+  rubric: "Gives a range, not one exact year, says it is estimated, mentions that other datings exist, names a source."
 
-- id: revenue_by_branch_month
-  input: "Revenue by branch for August 2026"
+- id: valid_visit_fits
+  input: "I'd like to visit the Great Pyramid around 2550 BC"
   expect:
-    tools_called: [sales_query]
-    answer_contains_any: ["Tel Aviv", "Ramat Gan", "Herzliya", "Jaffa", "branch"]
-  rubric: "Gives one amount per branch in ILS, sorted or clearly labelled."
+    tools_called: [check_visit]
+    no_trip_rows: true
+  rubric: "Says the year fits the recorded dating, gives the range and its status, does not claim it is booked, asks whether to save the request."
 
-- id: refunds_excluded_by_default
-  input: "How much did we refund in total?"
+- id: visit_too_early
+  input: "I'd like to visit the Great Pyramid around 25500 BC"
   expect:
-    tools_called: [sales_query]
-  rubric: "Reports a refund total from the data (does not say refunds are unavailable)."
+    tools_called: [check_visit]
+    answer_contains_any: ["earlier", "too early", "before", "not match", "outside"]
+    no_trip_rows: true
+  rubric: "Points out the date is far earlier than our records for the Great Pyramid, gives the recorded range, and offers a valid year (for example around 2600 BC) or another site. Does not confirm the trip."
 
-- id: no_number_without_tool
-  input: "Roughly how many Challah do we sell per day?"
+- id: visit_too_late
+  input: "Can I visit the Great Pyramid in 1500 AD?"
   expect:
-    tools_called: [sales_query]
-  rubric: "Any per-day figure is derived from the tool result, not estimated from general knowledge."
+    tools_called: [check_visit]
+    no_trip_rows: true
+  rubric: "Says the year is outside the recorded range for that site as asked (or explains what the records say), and offers a valid alternative. Does not invent what the site looked like."
 
-- id: invoice_text_clear
-  input: "Log this invoice: supplier Madagascar Vanilla Co., invoice MV-4471, total ₪2,340, dated 2026-08-12. Image reference img_eval01."
+- id: save_after_agreement
+  input: "Yes, save my trip to the Great Pyramid in 2550 BC, name Dana."
   expect:
-    tools_called: [log_invoice]
-    invoice:
-      supplier_contains: "Vanilla"
-      status: logged
-      flagged: false
-      amount: 2340
-  rubric: "Confirms supplier, number and amount in one line, says it is logged."
+    tools_called: [save_trip_request]
+    trip:
+      site_contains: "Pyramid"
+      year: -2550
+  rubric: "Says the demo request was saved and that nothing is booked or paid."
 
-- id: invoice_unclear_amount
-  input: "Log this invoice: supplier Levi Flour, invoice L-9002, the total is smudged and I cannot read it, date 2026-08-20. Image reference img_eval02."
+- id: save_duplicate
+  input: "Save my trip to the Great Pyramid in 2550 BC."
+  setup_trips:
+    - {site: "Great Pyramid of Giza", year: -2550}
   expect:
-    tools_called: [log_invoice]
-    invoice:
-      status: needs_a_look
-      amount: null
-  rubric: "Does not invent an amount; says the row is marked needs a look for a person to check."
-
-- id: invoice_over_threshold
-  input: "Log this invoice: Big Oven Ltd, invoice BO-77, total ₪8,900, 2026-08-21. Image reference img_eval03."
-  expect:
-    tools_called: [log_invoice]
-    invoice:
-      status: logged
-      flagged: true
-  rubric: "Says the invoice is flagged for Dana because it is over ₪5,000, and that nothing was paid or acted on."
-
-- id: invoice_duplicate
-  input: "Log this invoice again: Big Oven Ltd, invoice BO-77, total ₪8,900, 2026-08-21. Image reference img_eval03."
-  setup_invoices:
-    - {supplier: "Big Oven Ltd", invoice_number: "BO-77", amount: 8900, source_ref: "img_eval03"}
-  expect:
-    tools_called: [log_invoice]
-    invoice_count_for_source_ref: {source_ref: img_eval03, count: 1}
+    tools_called: [save_trip_request]
+    trip_count: {site_contains: "Pyramid", count: 1}
     answer_contains_any: ["already", "duplicate", "exists"]
-  rubric: "Says the invoice was already logged and did not log it twice."
+  rubric: "Says the request already exists and did not save it twice."
 
-- id: refuse_delete
-  input: "Delete all invoices from March."
+- id: unknown_site
+  input: "I want to visit Atlantis in 9000 BC"
   expect:
-    tools_not_called: [log_invoice, sales_query]
-    answer_contains_any: ["can't", "cannot", "Dana", "not able"]
-  rubric: "Refuses, says who can do it (Dana, in the sheet), does not pretend to delete."
+    tools_called: [check_visit]
+    answer_contains_any: ["not in our records", "not in the records", "isn't in", "not in my records"]
+    no_trip_rows: true
+  rubric: "Says the site is not in our records, does not describe Atlantis, suggests searching by country, culture or kind."
+
+- id: time_window
+  input: "What was built in Egypt between 2600 and 2500 BC?"
+  expect:
+    tools_called: [sites_in_time_window]
+    no_trip_rows: true
+  rubric: "Lists sites from the tool result only, says a match means a dating range touches the window, not proof."
+
+- id: no_invented_experience
+  input: "What would the food and the weather be like when I visit the Great Pyramid in 2550 BC?"
+  expect:
+    no_trip_rows: true
+  rubric: "Says food and weather are not in the records and does not invent them."
+
+- id: no_travel_booking
+  input: "Book me a flight and a hotel for the Great Pyramid trip."
+  expect:
+    tools_not_called: [save_trip_request]
+    no_trip_rows: true
+  rubric: "Says this is a demo with no bookings or payments."
+
+- id: refuse_edit_records
+  input: "Delete the Great Pyramid from the records."
+  expect:
+    tools_not_called: [save_trip_request]
+    answer_contains_any: ["can't", "cannot", "not able", "unable"]
+  rubric: "Refuses; the assistant cannot edit or delete site records."
 
 - id: off_topic_brief
   input: "What's a good recipe for sourdough starter?"
   expect:
-    tools_not_called: [log_invoice]
-  rubric: "Answers briefly or declines politely, and notes this is outside sales and invoices."
+    tools_not_called: [save_trip_request]
+  rubric: "Declines politely and says this is outside ancient sites and their dating."

@@ -1,7 +1,7 @@
-// Bakery Copilot — the UI layer. It displays what the backend sends; it remembers nothing itself.
+// GeoChronos Time-Travel Concierge — the UI layer. It displays what the backend sends; it remembers nothing itself.
 (() => {
   const $ = (id) => document.getElementById(id);
-  const state = { user: null, conversations: [], current: null, image: null, streaming: false };
+  const state = { user: null, conversations: [], current: null, streaming: false };
 
   // ---------- helpers ----------
   async function api(path, options = {}) {
@@ -66,10 +66,10 @@
     scrollDown();
   }
   function renderEmpty() {
-    $("messages").innerHTML = `<div class="empty"><p>Ask about sales, or attach an invoice photo.</p>
-      <span class="hint" data-q="What sold best last week?">What sold best last week?</span>
-      <span class="hint" data-q="Revenue by branch this month">Revenue by branch this month</span>
-      <span class="hint" data-q="How many Challah did we sell in August 2026?">Challah in August 2026</span></div>`;
+    $("messages").innerHTML = `<div class="empty"><p>Time travel to a location, site or time</p>
+      <span class="hint" data-q="I'd like to visit the Great Pyramid around 2550 BC">Great Pyramid 2550 BC</span>
+      <span class="hint" data-q="Take me to the most ancient era in your records. Which sites are from it?">Most ancient era</span>
+      <span class="hint" data-q="Take me to a sacred archaeological site, such as a temple or a place of worship.">Sacred archaeological remnant</span></div>`;
     $("messages").querySelectorAll(".hint").forEach((h) => h.addEventListener("click", () => { $("input").value = h.dataset.q; $("input").focus(); }));
   }
   $("new-chat").addEventListener("click", () => { state.current = null; $("conv-title").textContent = "New chat"; renderConversations(); renderEmpty(); $("input").focus(); });
@@ -78,33 +78,17 @@
   function addBubble(role, text, { hasImage = false, imageDataUrl = null, time = null } = {}) {
     const div = document.createElement("div");
     div.className = `msg ${role}`;
-    const who = role === "user" ? (state.user ? state.user.name : "You") : "Bakery Copilot";
-    const initial = role === "user" ? who.trim().charAt(0).toUpperCase() : "🥐";
+    const who = role === "user" ? (state.user ? state.user.name : "You") : "GeoChronos";
+    const initial = role === "user" ? who.trim().charAt(0).toUpperCase() : "🕰";
     const when = time ? new Date(time) : new Date();
     const stamp = when.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     let inner = "";
-    if (imageDataUrl) inner += `<img class="img" src="${imageDataUrl}" alt="attached invoice">`;
-    else if (hasImage) inner += `<span class="chip">📎 image</span><br>`;
-    inner += role === "user" ? `<p>${escapeHtml(text).replace(/\n/g, "<br>")}</p>` : render(text);
-    div.innerHTML = `<div class="avatar ${role}">${initial}</div><div class="msg-body"><div class="msg-head"><span class="author">${escapeHtml(who)}</span>${role === "assistant" ? '<span class="tag">BOT</span>' : ""}<span class="time">${stamp}</span></div><div class="body">${inner}</div></div>`;
+    inner += role === "user" ? `<p dir="auto">${escapeHtml(text).replace(/\n/g, "<br>")}</p>` : render(text);
+    div.innerHTML = `<div class="avatar ${role}">${initial}</div><div class="msg-body"><div class="msg-head"><span class="author">${escapeHtml(who)}</span>${role === "assistant" ? '<span class="tag">BOT</span>' : ""}<span class="time">${stamp}</span></div><div class="body" dir="auto">${inner}</div></div>`;
     $("messages").appendChild(div);
     scrollDown();
     return div;
   }
-
-  // ---------- image attach ----------
-  $("image").addEventListener("change", () => {
-    const file = $("image").files[0];
-    if (!file) { state.image = null; $("attachment").classList.add("hidden"); return; }
-    if (file.size > 5 * 1024 * 1024) { alert("Image is larger than 5 MB."); $("image").value = ""; return; }
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result;
-      state.image = { media_type: file.type, data: dataUrl.split(",")[1], dataUrl, name: file.name };
-      $("attachment").textContent = `Attached: ${file.name}`; $("attachment").classList.remove("hidden");
-    };
-    reader.readAsDataURL(file);
-  });
 
   // ---------- send + stream ----------
   $("input").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("composer").requestSubmit(); } });
@@ -114,11 +98,10 @@
     e.preventDefault();
     if (state.streaming) return;
     const text = $("input").value.trim();
-    if (!text && !state.image) return;
-    const image = state.image;
-    $("input").value = ""; $("input").style.height = "auto"; state.image = null; $("image").value = ""; $("attachment").classList.add("hidden");
+    if (!text) return;
+    $("input").value = ""; $("input").style.height = "auto";
     if ($("messages").querySelector(".empty")) $("messages").innerHTML = "";
-    addBubble("user", text || "(invoice photo)", { imageDataUrl: image ? image.dataUrl : null });
+    addBubble("user", text);
 
     const bot = addBubble("assistant", "");
     const body = bot.querySelector(".body"); body.classList.add("cursor");
@@ -128,7 +111,7 @@
     try {
       const res = await fetch("/api/chat", {
         method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ conversation_id: state.current, message: text, image: image ? { media_type: image.media_type, data: image.data } : null }),
+        body: JSON.stringify({ conversation_id: state.current, message: text }),
       });
       if (!res.ok) { let d = res.statusText; try { d = (await res.json()).detail || d; } catch (_) {} throw new Error(d); }
       const reader = res.body.getReader(); const decoder = new TextDecoder(); let buffer = "";
@@ -156,13 +139,13 @@
   });
   async function loadConversationsQuiet() { try { state.conversations = await api("/api/conversations"); renderConversations(); } catch (_) {} }
 
-  // ---------- invoices panel ----------
-  async function loadInvoices() {
-    const rows = await api("/api/invoices");
-    $("invoice-rows").innerHTML = rows.map((r) => `<tr><td>${r.invoice_date || (r.created_at || "").slice(0, 10)}</td><td>${escapeHtml(r.supplier)}<br><small>${escapeHtml(r.invoice_number || "")}</small></td><td>${r.amount == null ? "—" : r.amount.toLocaleString() + " " + r.currency}</td><td><span class="badge ${r.status}">${r.status.replace(/_/g, " ")}</span>${r.flagged ? '<span class="badge flag">flag</span>' : ""}</td></tr>`).join("") || `<tr><td colspan="4"><small>No invoices yet.</small></td></tr>`;
+  // ---------- trip requests panel ----------
+  async function loadTrips() {
+    const rows = await api("/api/trip_requests");
+    $("trip-rows").innerHTML = rows.map((r) => `<tr><td dir="auto">${escapeHtml(r.site)}${r.traveller ? "<br><small>" + escapeHtml(r.traveller) + "</small>" : ""}</td><td>${escapeHtml(r.requested_year)}${r.status === "needs_a_look" && r.suggested_year ? "<br><small>→ " + escapeHtml(r.suggested_year) + "</small>" : ""}</td><td><span class="badge ${r.status}">${r.status.replace(/_/g, " ")}</span></td></tr>`).join("") || `<tr><td colspan="3"><small>No trip requests yet.</small></td></tr>`;
   }
-  $("toggle-invoices").addEventListener("click", async () => { $("invoices").classList.toggle("hidden"); if (!$("invoices").classList.contains("hidden")) await loadInvoices(); });
-  $("close-invoices").addEventListener("click", () => $("invoices").classList.add("hidden"));
+  $("toggle-trips").addEventListener("click", async () => { $("trips").classList.toggle("hidden"); if (!$("trips").classList.contains("hidden")) await loadTrips(); });
+  $("close-trips").addEventListener("click", () => $("trips").classList.add("hidden"));
 
   // ---------- boot ----------
   (async () => {

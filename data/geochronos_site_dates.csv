@@ -1,0 +1,281 @@
+site_id,role,start_earliest,start_latest,end_earliest,end_latest,precision,qualifier,label,dating_method,calendar,status,confidence,rank,dispute_group,note
+abu-simbel-temples,construction,-1263,-1263,-1243,-1243,year,circa,c. 1264–1244 BC,,unspecified,accepted,medium,preferred,abu-simbel:construction,
+abu-simbel-temples,construction,-1294,-1274,-1264,-1264,year,circa,completed around 1265 BC (year 24 of Ramesses II),,unspecified,alternative,medium,normal,abu-simbel:construction,The same Wikipedia revision states both c. 1264–1244 BC and completion c. 1265 BC after ~20 years of work; kept as two claims rather than silently choosing.
+abu-simbel-temples,relocation,,,1968,1968,year,,relocation completed 1968,,unspecified,accepted,high,preferred,,Start of the rescue operation not captured (unknown in this source extract).
+abu-simbel-temples,construction,-1273,-1273,-1273,-1273,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+ahu-tongariki,damage,1960,1960,1960,1960,year,,swept inland by the 1960 tsunami,,unspecified,accepted,high,normal,,
+ahu-tongariki,restoration,1990,1990,1999,1999,decade,,substantially restored in the 1990s,,unspecified,accepted,high,normal,,
+ajanta-caves,construction,-199,-199,100,100,century,,first phase: 2nd century BCE to 1st century CE,,unspecified,accepted,medium,preferred,ajanta:phase1,
+ajanta-caves,construction,-99,-99,100,100,century,,first phase 100 BCE – 100 CE (Walter Spink),,unspecified,alternative,medium,normal,ajanta:phase1,
+ajanta-caves,construction,400,400,650,650,decade,,second phase 400–650 CE according to older accounts,,unspecified,disputed,medium,normal,ajanta:phase2,
+ajanta-caves,construction,460,460,480,480,decade,,second phase in a brief period of 460–480 CE according to later scholarship,,unspecified,disputed,medium,normal,ajanta:phase2,
+ajanta-caves,discovery,1819,1819,1819,1819,year,,'discovered' in 1819 by Colonel John Smith,,unspecified,accepted,high,normal,,
+ajanta-caves,construction,-199,-100,-199,-100,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+akrotiri,destruction,-1619,-1619,-1529,-1529,decade,,most probably 1620–1530 BC (radiocarbon),radiocarbon,unspecified,disputed,medium,normal,thera:date,
+akrotiri,destruction,-1569,-1569,-1499,-1499,decade,,1570–1500 BC (material-culture comparison),archaeological synchronism,unspecified,disputed,medium,normal,thera:date,
+aleppo-codex,creation,910,930,910,930,decade,circa,written in Tiberias in the 10th century CE (circa 920),,unspecified,accepted,medium,preferred,,
+aleppo-codex,damage,1947,1947,1947,1947,year,,synagogue of Aleppo torched during anti-Jewish riots in 1947,,unspecified,accepted,high,normal,,
+aleppo-codex,relocation,1958,1958,1958,1958,year,,resurfaced in Israel in 1958,,unspecified,accepted,high,normal,,
+aleppo-codex,creation,929,929,929,929,year,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+aleppo-codex,creation,901,1000,901,1000,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+angkor-wat,construction,1113,1113,1150,1150,year,,constructed between 1113 and 1150 CE (reign of Suryavarman II),,unspecified,accepted,high,preferred,angkor-wat:construction,
+angkor-wat,construction,1122,1122,1150,1150,year,,"commenced 1122 CE, completed 1150 CE",,unspecified,alternative,medium,normal,angkor-wat:construction,
+angkor-wat,construction,802,802,802,802,year,,Wikidata P571,,gregorian,disputed,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates. Curator review: Wikidata inception 802 CE conflicts with the documented construction under Suryavarman II (1113–1150 CE); 802 is plausibly the traditional founding year of the Khmer Empire misapplied (curator hypothesis).
+angkor-wat,construction,1101,1200,1101,1200,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+antikythera-mechanism,creation,-86,-86,-86,-86,year,circa,about 87 BC,,unspecified,alternative,low,normal,antikythera:creation,
+antikythera-mechanism,creation,-149,-149,-99,-99,decade,,between 150 and 100 BC,,unspecified,alternative,medium,preferred,antikythera:creation,
+antikythera-mechanism,creation,-204,-204,-204,-204,year,circa,205 BC,,unspecified,alternative,low,normal,antikythera:creation,
+antikythera-mechanism,deposition,-69,-69,-59,-59,decade,circa,shipwreck c. 70–60 BC (terminus ante quem for construction),,unspecified,accepted,high,preferred,,
+antikythera-mechanism,discovery,1901,1901,1901,1901,year,,retrieved from the wreck in 1901,,unspecified,accepted,high,normal,,
+antikythera-mechanism,existence,-99,0,,,century,,Wikidata P580/P582,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+babylon,first_record,-2216,-2216,-2192,-2192,year,,earliest known mention on a tablet from the reign of Shar-Kali-Sharri (2217–2193 BC),,unspecified,accepted,medium,normal,,
+babylon,occupation,-2216,-2192,1001,1100,century,,from the earliest mention to the last known habitation (11th century AD),,unspecified,accepted,medium,preferred,,
+babylon,use,-625,-625,-538,-538,year,,"capital of the Neo-Babylonian Empire, 626–539 BC",,unspecified,accepted,high,normal,,
+babylon,construction,-2999,-2000,-2999,-2000,millennium,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+bagan,use,801,801,1300,1300,century,,capital of the Pagan Kingdom from the 9th to 13th centuries,,unspecified,accepted,medium,preferred,,
+bagan,construction,1001,1001,1300,1300,century,,"more than 10,000 religious buildings constructed between the 11th and 13th centuries",,unspecified,accepted,medium,normal,,
+bagan,existence,850,850,899,899,decade,,founded in the mid-to-late 9th century (Western scholarship),,unspecified,accepted,low,normal,bagan:founding,The Burmese chronicles give a different (earlier) founding; their date was not captured from the source extract.
+bagan,construction,101,200,101,200,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+blombos-cave,occupation,-99050,-99050,-68050,-68050,ka,,"c. 101,000–70,000 years ago (MSA levels)",luminescence / U-Th / ESR,unspecified,accepted,medium,preferred,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+blombos-cave,occupation,-73550,-73550,-65850,-65850,ka,,"Still Bay sequence 75,500–67,800 years ago",OSL (Bayesian model),unspecified,accepted,medium,normal,,"Sub-phase estimate (2013), 95% confidence. Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+borobudur,construction,701,701,800,800,century,,constructed in the 8th century,,unspecified,accepted,medium,preferred,,
+borobudur,restoration,,,1983,1983,year,,largest restoration completed 1983,,unspecified,accepted,high,normal,,
+borobudur,construction,701,800,701,800,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+buddhas-of-bamiyan,creation,560,580,560,580,decade,circa,smaller 'Eastern Buddha' built around 570 CE,radiocarbon (structural components),unspecified,accepted,medium,preferred,,
+buddhas-of-bamiyan,creation,608,628,608,628,decade,circa,larger 'Western Buddha' built around 618 CE,radiocarbon (structural components),unspecified,accepted,medium,normal,,
+buddhas-of-bamiyan,creation,575,625,575,625,century,circa,carved around 600 CE during Hephthalite rule,,unspecified,alternative,low,normal,,
+buddhas-of-bamiyan,destruction,2001,2001,2001,2001,month,,destroyed in March 2001,,gregorian,accepted,high,normal,,
+budj-bim,use,-4650,-4650,,,century,circa,"one eel-trap system carbon-dated to 6,600 years old",,unspecified,accepted,medium,preferred,,"Open-ended: continued use into the colonial era is not dated in the source. Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+cahokia,occupation,1050,1050,1350,1350,decade,circa,c. 1050–1350 AD (apex c. 1100),,unspecified,accepted,high,preferred,,
+cahokia,occupation,550,650,,,century,circa,settled around 600 CE (Late Woodland),,unspecified,accepted,medium,normal,,Open end.
+cahokia,construction,1050,1050,1050,1050,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+caral,occupation,-2599,-2599,-1999,-1999,century,circa,inhabited from around 2600 BC to 2000 BC,,unspecified,accepted,medium,preferred,,
+caral,occupation,-2626,-2626,-2626,-2626,year,,2627 BC (radiocarbon on reeds and carrying bags),radiocarbon,unspecified,accepted,medium,normal,,Single-point radiocarbon date cited for the site.
+carnac-stones,construction,-4499,-3299,-3299,-3299,century,circa,"probably around 3300 BC, some perhaps as early as 4500 BC",,unspecified,accepted,medium,preferred,,Start uncertain between 4500 and 3300 BC; most stones probably c. 3300 BC.
+catalhoyuk,occupation,-7499,-7499,-5599,-5599,century,circa,from around 7500 BC to 5600 BC,,unspecified,accepted,high,preferred,,
+catalhoyuk,construction,-7499,-7499,-7499,-7499,year,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+cave-of-altamira,creation,-34050,-34050,-34050,-34050,ka,circa,"earliest paintings applied around 36,000 years ago",,unspecified,accepted,medium,preferred,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+cave-of-altamira,occupation,-16550,-16550,-16550,-16550,ka,circa,"Upper Solutrean deposits (c. 18,500 years ago)",,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+cave-of-altamira,occupation,-14640,-14640,-12050,-12050,ka,circa,"Lower Magdalenian deposits (c. 16,590–14,000 years ago)",,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+cave-of-altamira,discovery,1868,1868,1868,1868,year,,discovered in 1868 by Modesto Cubillas,,unspecified,accepted,high,normal,,
+cave-of-altamira,construction,-39999,-30000,-39999,-30000,ka,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+cave-of-altamira,construction,-12999,-12000,-12999,-12000,millennium,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+chan-chan,occupation,850,850,1470,1470,decade,circa,constructed around 850 AD; declined after the Inca conquest around 1470 AD,,unspecified,accepted,medium,preferred,,
+chan-chan,construction,850,850,850,850,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+chauvet-cave,creation,-30050,-30050,-28050,-28050,ka,,"art placed in the Aurignacian, approximately 32,000–30,000 years ago (2012 study)",,unspecified,disputed,medium,preferred,chauvet:dating,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+chauvet-cave,occupation,-35050,-35050,-31550,-31550,ka,,"first period of habitation 37,000–33,500 years ago, when most black drawings were made (2016 study)",88 additional radiocarbon dates (2016),unspecified,disputed,medium,normal,chauvet:dating,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+chauvet-cave,occupation,-29050,-29050,-26050,-26050,ka,,"second period of habitation 31,000–28,000 years ago (2016 study)",,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+chauvet-cave,occupation,-25050,-25050,-23050,-23050,ka,,"later Gravettian occupation 27,000–25,000 years ago",,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+chichen-itza,occupation,600,600,1200,1200,century,circa,Late Classic (c. 600–900) into the early Postclassic (c. 900–1200),,unspecified,accepted,medium,preferred,,
+chichen-itza,construction,455,455,455,455,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+chicxulub-crater,event,,-65998050,,,Ma,before,formed slightly over 66 million years ago,,unspecified,accepted,high,preferred,,"'Slightly over' = an upper bound on the date (it happened at or before 66 Ma). Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+chicxulub-crater,discovery,1978,1978,1991,1991,year,,magnetic survey 1978; identification published 1991,,unspecified,accepted,high,normal,,
+chicxulub-crater,construction,-65999999,-65000000,-65999999,-65000000,Ma,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+cliff-palace,occupation,1200,1200,1300,1300,decade,circa,constructed and lived in from about 1200 to 1300 AD,,unspecified,accepted,medium,preferred,,
+colosseum,construction,70,72,80,80,year,,"begun c. 70–72 AD under Vespasian, completed AD 80 under Titus",,unspecified,accepted,high,preferred,colosseum:start,
+colosseum,construction,73,75,80,80,year,,begun 73–75 AD (according to some sources),,unspecified,alternative,low,normal,colosseum:start,
+colosseum,construction,82,82,82,82,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+dead-sea-scrolls,creation,-299,-299,100,100,century,,3rd century BCE to 1st century CE,palaeography + radiocarbon + numismatics,unspecified,accepted,high,preferred,,
+dead-sea-scrolls,discovery,1946,1946,1956,1956,year,,discovered 1946/1947 and until 1956,,unspecified,accepted,high,normal,,
+dolmen-of-menga,construction,-3749,-3749,-3649,-3649,decade,circa,around 3750–3650 BCE,,unspecified,accepted,medium,preferred,,
+gobekli-tepe,occupation,-9499,-9499,-7999,,century,circa,inhabited from around 9500 BCE to at least 8000 BCE,,unspecified,accepted,high,preferred,,Latest end left open: 'or perhaps slightly later'.
+gobekli-tepe,construction,-9499,-9499,-8999,-8999,century,,earliest exposed structures built 9500–9000 BCE,radiocarbon,unspecified,accepted,high,normal,,
+gobekli-tepe,use,-9744,-9744,-9313,-9313,decade,,Enclosure D: 9984 ± 42 14C-BP = 9745–9314 calBC (95.4%),"radiocarbon (wall plaster), 95.4%",unspecified,accepted,medium,normal,,
+gobekli-tepe,use,-9260,-9260,-9138,-9138,decade,,Enclosure C: 9700 ± 30 14C-BP = 9261–9139 calBC (91.6%),"radiocarbon, 91.6%",unspecified,accepted,medium,normal,,
+gobekli-tepe,use,-8299,-8299,-7699,-7699,millennium,circa,Layer II: late 9th / early 8th millennium calBC,,unspecified,accepted,low,normal,,Numeric bounds are a POC reading of 'late 9th / early 8th millennium' (reversible); the source wording is kept in the label.
+gobekli-tepe,construction,-9999,-9000,-9999,-9000,millennium,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+gochang-hwasun-ganghwa-dolmens,construction,-699,-600,-299,-200,century,circa,dated to the 7th century BCE; practice ended around the 3rd century BCE,,unspecified,accepted,medium,preferred,,
+great-mosque-of-djenne,construction,1906,1906,1907,1907,year,,"current structure: rebuilding arranged in 1906, completed in 1907",,unspecified,accepted,high,preferred,,
+great-mosque-of-djenne,construction,1200,1200,1330,1330,decade,between,first mosque on the site: dates as early as 1200 and as late as 1330 have been suggested,,unspecified,accepted,low,normal,,Same Item across rebuilds is a modelling choice (see SPEC_INPUTS.md).
+great-mosque-of-djenne,construction,1906,1906,1906,1906,year,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+great-pyramid-of-giza,construction,-2699,-2699,-2499,-2499,century,between,between 2700 and 2500 BC,,unspecified,accepted,medium,preferred,great-pyramid:construction,Range of 'the majority of recent chronological estimates' for Khufu and his pyramid (Wikipedia).
+great-pyramid-of-giza,construction,-2870,-2870,-2603,-2603,year,,"2871–2604 BC (calibrated, mortar charcoal)",radiocarbon,unspecified,alternative,medium,normal,great-pyramid:construction,Radiocarbon dates on organic inclusions in mortar; charcoal can carry an old-wood offset.
+great-pyramid-of-giza,construction,-2619,-2619,-2483,-2483,year,,completion 2620–2484 BC (reanalysis),radiocarbon,unspecified,alternative,medium,normal,great-pyramid:construction,"Reanalysis based on the younger samples, as reported by Wikipedia. The underlying study (Bonani et al. 2001, Radiocarbon) was located via OpenAlex but its abstract states no values: not verified at source."
+great-pyramid-of-giza,construction,-2588,-2588,-2565,-2565,year,circa,the tomb of King Khufu (c. 2589–2566 BC); an estimated 10 to 20 years to build,,unspecified,alternative,medium,normal,great-pyramid:construction,Official page gives Khufu's reign; construction is placed within that reign. Institutional statement following one conventional chronology.
+great-pyramid-of-giza,construction,-2559,-2559,-2559,-2559,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+great-sphinx-of-giza,creation,-2599,-2599,-2499,-2499,century,between,between 2600 and 2500 BC,,unspecified,accepted,medium,preferred,,
+great-sphinx-of-giza,creation,-2499,-2499,-2499,-2499,century,circa,"under Khafre (ca. 2,500 B.C.)",,unspecified,alternative,medium,normal,,Dating tied to the Khafre attribution.
+great-sphinx-of-giza,construction,-2599,-2500,-2599,-2500,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+great-zimbabwe,occupation,950,1050,,,century,circa,settled from around 1000 AD,,unspecified,accepted,medium,preferred,,End of occupation not stated in the retrieved source: open-ended.
+great-zimbabwe,use,1201,1201,1300,1300,century,,capital of the Kingdom of Great Zimbabwe from the 13th century,,unspecified,accepted,medium,normal,,Only the start is bounded (13th century).
+hadrians-wall,construction,122,122,122,,year,,begun in AD 122 in the reign of Hadrian,,unspecified,accepted,high,normal,,Completion date not captured from the source extract.
+hadrians-wall,use,122,122,410,410,year,,Roman frontier until the end of Roman rule in Britain in 410 AD,,unspecified,accepted,medium,preferred,,
+hadrians-wall,construction,122,122,122,122,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+hagar-qim,construction,-3599,-3599,-3199,-3199,century,,main temple built between 3600 and 3200 BC,,unspecified,accepted,high,preferred,,Northern ruins are 'considerably older' (undated in source).
+hagia-sophia,construction,532,532,537,537,year,,current structure built by Justinian I between 532 and 537,,unspecified,accepted,high,preferred,,
+hagia-sophia,construction,346,346,346,346,decade,circa,earlier 'Great Church' constructed by Constantius c. 346 (Socrates of Constantinople),,unspecified,alternative,low,normal,,Ancient report; whether that church was already called Hagia Sophia is questioned (Mainstone).
+hagia-sophia,reuse,1453,1453,1453,1453,year,,became a mosque after the fall of Constantinople (1453),,unspecified,accepted,high,normal,,
+hagia-sophia,reuse,1935,1935,1935,1935,year,,opened as a museum in 1935,,unspecified,accepted,high,normal,,
+hagia-sophia,reuse,2020,2020,2020,2020,year,,reclassified as a mosque in 2020,,unspecified,accepted,high,normal,,
+hagia-sophia,construction,537,537,537,537,day,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+hagia-sophia,construction,532,532,532,532,day,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+hagia-sophia,construction,415,415,415,415,day,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+hagia-sophia,construction,360,360,360,360,day,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+harappa,occupation,-2599,-2599,-1899,-1899,century,,"Mature Harappan phase (2600 BC – 1900 BC), the city's greatest extent",,unspecified,accepted,medium,preferred,harappa:mature,
+harappa,occupation,-2599,-2599,-1999,-1999,century,,the civilization's mature phase lasted from 2600 BC to 2000 BC,,unspecified,alternative,medium,normal,harappa:mature,Same article gives two end dates for the mature phase.
+harappa,damage,1857,1857,1857,1857,year,,bricks taken for railway ballast in 1857,,unspecified,accepted,high,normal,,
+hattusa,occupation,-5999,-5999,-5000,-5000,millennium,,earliest traces of settlement from the 6th millennium BC,,unspecified,accepted,medium,normal,,
+hattusa,destruction,-1724,-1674,-1724,-1674,century,circa,burned and ruined around 1700 BC (attributed to Anitta of Kussara),,unspecified,accepted,medium,normal,,
+hattusa,use,-1649,-1649,,,century,circa,Hittite capital from around 1650 BC (Labarna/Hattusili),,unspecified,accepted,medium,preferred,,End of the capital phase not captured from the source extract.
+karnak-temple-complex,construction,-1970,-1925,-304,-29,year,,from the reign of Senusret I (1971–1926 BCE) into the Ptolemaic Kingdom (305–30 BCE),,unspecified,accepted,medium,preferred,,"Four-bound example: start known to within a reign, end known only to within a dynasty."
+karnak-temple-complex,construction,-1899,-1899,-1899,-1899,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+kilwa-kisiwani,occupation,801,801,,,century,,founding confirmed at the start of the 9th century CE,radiocarbon,unspecified,accepted,medium,preferred,,Start only; the island is still inhabited.
+kilwa-kisiwani,use,1201,1201,1500,1500,century,,highest point in wealth and commerce between the 13th and 15th centuries,,unspecified,accepted,medium,normal,,
+kilwa-kisiwani,construction,900,909,900,909,decade,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+knossos,occupation,-7099,-6899,,,millennium,circa,settlement from around 7000 BC into the modern period,,unspecified,accepted,high,preferred,,Open-ended occupation.
+knossos,occupation,-2999,-2999,-1899,-1899,century,circa,"Prepalatial period, about 3000 to 1900 BC",,unspecified,accepted,medium,normal,,
+knossos,use,-1949,-1849,-1399,-1299,century,circa,palace: first built c. 1900 BC; major destruction conventionally c. 1350 BC,,unspecified,accepted,medium,normal,,Final-destruction chronology 'remains debated' (Wikipedia).
+knossos,construction,-6999,-6999,-6999,-6999,year,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+kuk-swamp,use,-7050,-7050,,,ka,circa,"agricultural drainage systems beginning about 9,000 years ago",,unspecified,accepted,medium,preferred,,"Start only; end of use not dated in the source. Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+kuk-swamp,use,-4950,-4950,-4450,-4450,century,,"cultivation of bananas and sugar cane, 6,900–6,400 years ago",,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+kuk-swamp,use,-5000,-5000,-4600,-4600,century,,"banana phytoliths indicating deliberate planting, 6950–6550 years ago",,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+laetoli,deposition,-3698050,-3698050,-3698050,-3698050,Ma,circa,footprints dated to 3.7 million years ago,,unspecified,accepted,medium,preferred,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+laetoli,deposition,-3798050,-3798050,-3598050,-3598050,Ma,,upper unit of the Laetolil Beds: 3.6 to 3.8 million years ago,,unspecified,accepted,medium,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+laetoli,discovery,1976,1976,1978,1978,year,,"tracks discovered by Mary Leakey's team in 1976, excavated by 1978",,unspecified,accepted,high,normal,,
+lanse-aux-meadows,use,1021,1021,1021,1021,year,,Norse wood-cutting activity in 1021,dendrochronology + 993 CE cosmic-ray 14C anomaly,unspecified,accepted,high,preferred,lam:date,
+lanse-aux-meadows,use,990,990,1050,1050,decade,,carbon dating estimates 990–1050 CE (mean 1014),radiocarbon,unspecified,accepted,medium,normal,lam:date,
+lascaux-cave,creation,-20050,-20050,-15050,-15050,ka,,"paintings usually estimated at 17,000–22,000 years old",,unspecified,accepted,medium,preferred,,"'17,000 to 22,000 years' old, stored as ka before 1950; the ~75-year difference between 'before 1950' and 'before today' is far below the precision. Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+lascaux-cave,discovery,1940,1940,1940,1940,day,,entrance discovered 12 September 1940,,gregorian,accepted,high,preferred,,
+leptis-magna,occupation,-649,-600,647,647,century,circa,Punic city founded in the second half of the 7th century BC; fell c. 647 and was subsequently abandoned,,unspecified,accepted,medium,preferred,,
+leptis-magna,occupation,,-499,,,century,before,established as a Punic settlement prior to 500 BC,,unspecified,accepted,medium,normal,,
+leptis-magna,construction,-699,-600,-699,-600,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+lucy-al-288-1,life,-3198050,-3198050,-3198050,-3198050,Ma,circa,lived around 3.2 million years ago,,unspecified,accepted,medium,preferred,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+lucy-al-288-1,discovery,1974,1974,1974,1974,year,,discovered in 1974 at Hadar,,unspecified,accepted,high,normal,,
+lucy-al-288-1,relocation,2007,2007,2013,2013,year,,exhibited on a six-year US tour from 2007; original fossils returned to Ethiopia in 2013,,unspecified,accepted,high,normal,,
+lucy-al-288-1,life,-3199999,-3190000,-3199999,-3190000,ka,,Wikidata P569/P570,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+machu-picchu,occupation,1420,1420,1530,1530,decade,circa,occupied from around 1420 to 1530,AMS radiocarbon (26 measurements on human remains),unspecified,accepted,high,preferred,machu-picchu:start,
+machu-picchu,construction,1450,1450,1450,1450,year,,Wikidata P571,,julian,alternative,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates. Curator review: Traditional c. 1450 construction date; AMS radiocarbon (Burger et al.) indicates occupation from c. 1420.
+masada,construction,-36,-36,-30,-30,year,,fortress built between 37 and 31 BC,historical (Josephus),unspecified,accepted,medium,preferred,,
+masada,destruction,73,73,73,73,year,,fall to Rome in 73 AD,historical,unspecified,disputed,medium,normal,masada:fall,
+masada,destruction,74,74,74,74,year,,fall to Rome in 74 AD,historical,unspecified,disputed,medium,normal,masada:fall,Sources give '73 or 74 CE'; no rank preferred.
+mask-of-tutankhamun,creation,-1331,-1331,-1322,-1322,year,,during Tutankhamun's reign (1332–1323 BC),,unspecified,accepted,medium,preferred,,Bounded by the reign; not independently dated.
+mask-of-tutankhamun,discovery,1925,1925,1925,1925,year,,found when the coffins and mummy were opened in 1925,,unspecified,accepted,medium,normal,,"The 'Mask of Tutankhamun' article revision states the mask was 'found in 1922 following the discovery of the tomb three years earlier', which is internally inconsistent; KV62 article gives 1925 for opening the coffins."
+mask-of-tutankhamun,creation,-1322,-1322,-1322,-1322,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+mask-of-tutankhamun,creation,-1333,-1333,-1333,-1333,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+mausoleum-of-qin-shi-huang,construction,-245,-245,-207,-207,year,,constructed 246–208 BC,,unspecified,accepted,high,preferred,qin-mausoleum:construction,
+mausoleum-of-qin-shi-huang,construction,-218,-218,-212,-212,year,,main project 219–213 BCE (alternative scholarly view),,unspecified,alternative,low,normal,qin-mausoleum:construction,
+mesha-stele,creation,-849,-829,-849,-829,decade,circa,dated around 840 BCE,,unspecified,accepted,medium,preferred,mesha:date,
+mesha-stele,creation,-839,,,-809,decade,,may be as late as 810 BCE (Lemaire),,unspecified,alternative,low,normal,mesha:date,
+mesha-stele,creation,-839,-839,-839,-839,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+mohenjo-daro,occupation,-2499,-2499,-1699,-1699,century,circa,built around 2500 BC; abandoned c. 1700 BCE,,unspecified,accepted,high,preferred,,
+mohenjo-daro,existence,-2499,-2400,-1699,-1600,century,,Wikidata P580/P582,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+monks-mound,construction,900,955,1100,1200,decade,,begun 900–955 CE; summit completed c. 1100; last terrace before 1200,,unspecified,accepted,high,preferred,,
+monte-alban,occupation,-499,-499,750,,century,circa,founded around 500 BC; lost pre-eminence by the end of the Late Classic (c. AD 500–750) and soon thereafter was largely abandoned,,unspecified,accepted,medium,preferred,,Latest end left open: 'soon thereafter'.
+monte-alban,use,-99,-99,200,200,century,circa,capital of a large-scale expansionist polity by the Terminal Formative (c. 100 BC – AD 200),,unspecified,accepted,medium,normal,,
+monte-verde,occupation,-12550,-12550,-12550,-12550,ka,circa,"Monte Verde II: generally suggested to date to 14,500 years ago",,unspecified,accepted,medium,preferred,monte-verde:mv2,"'Largely accepted (though not without dissent)'. Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+monte-verde,occupation,-12850,-12850,-12850,-12850,ka,circa,"average age of 14,800 BP (1982)","radiocarbon (1982, bones and charcoal; average)",unspecified,alternative,low,normal,monte-verde:mv2,Stated as BP; the source does not say whether calibrated.
+monte-verde,occupation,-16550,-16550,-12550,-12550,ka,,"Monte Verde I re-dated (2015) to around 18,500 to 14,500 BP",,unspecified,disputed,low,normal,,MV-I 'lacks the general acceptance of Monte Verde II'.
+murujuga,creation,,-43050,,,ka,before,"some carvings dated to more than 45,000 years old",,unspecified,accepted,medium,preferred,,"Only an upper bound on the start is known ('more than'); creation continued over a very long period (not dated in the source). Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+murujuga,creation,-48050,-48050,-38050,-38050,ka,,"some of the collection generally estimated to be 40,000–50,000 years old",,unspecified,alternative,low,normal,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+nan-madol,occupation,1,1,200,200,century,,human activity as early as the 1st or 2nd century AD,,unspecified,accepted,medium,normal,,Earliest activity only.
+nan-madol,construction,1180,1180,1200,1200,decade,,megalithic construction beginning 1180–1200 AD,,unspecified,accepted,medium,preferred,,Start of the megalithic phase only; end open.
+nazca-lines,creation,-499,-499,500,500,century,,created between 500 BC and 500 AD,,unspecified,accepted,medium,preferred,,
+nazca-lines,creation,-399,-399,-199,-199,century,,"Paracas phase, 400 to 200 BC",,unspecified,accepted,medium,normal,,
+nazca-lines,creation,-199,-199,500,500,century,,"Nazca phase, 200 BC to 500 AD",,unspecified,accepted,medium,normal,,
+nazca-lines,construction,-199,-199,-199,-199,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+nebra-sky-disc,creation,-1799,-1799,-1599,-1599,century,circa,dated by archaeologists to c. 1800–1600 BC (Early Bronze Age),,unspecified,accepted,medium,preferred,nebra:date,
+nebra-sky-disc,deposition,-1599,-1599,-1559,-1559,decade,,burial: birch bark in the sword hilts radiocarbon-dated to 1600–1560 BCE,radiocarbon (birch bark from sword hilts),unspecified,accepted,medium,normal,,
+nebra-sky-disc,deposition,-1699,-1699,-1499,-1499,century,circa,associated axes and swords dated typologically to c. 1700–1500 BCE,typology of the associated axes and swords,unspecified,accepted,medium,normal,,
+nebra-sky-disc,discovery,1999,1999,1999,1999,year,,found in 1999 by metal-detecting treasure hunters,,unspecified,accepted,high,normal,,
+nebra-sky-disc,creation,-1599,-1500,-1599,-1500,century,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+newgrange,construction,-3199,-2999,-3199,-2999,century,circa,built around 3100 BC,radiocarbon,unspecified,accepted,high,preferred,newgrange:construction,
+newgrange,construction,-2999,-2999,-2499,-2499,century,,3000–2500 BC (later estimate),,unspecified,alternative,low,normal,newgrange:construction,'Some put its period of construction somewhat later' (Wikipedia).
+obelisk-of-aksum,creation,301,301,400,400,century,,probably carved and erected during the 4th century CE,,unspecified,accepted,medium,preferred,,
+obelisk-of-aksum,relocation,1937,1937,1937,1937,year,,taken to Italy as war spoil (1937),,unspecified,accepted,high,normal,,
+obelisk-of-aksum,relocation,2005,2005,2005,2005,day,,"returned to Ethiopia in three pieces, 19–25 April 2005",,gregorian,accepted,high,normal,,
+obelisk-of-aksum,restoration,2008,2008,2008,2008,day,,re-erected and unveiled 4 September 2008,,gregorian,accepted,high,normal,,
+obelisk-of-aksum,construction,300,300,300,300,year,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+otzi,life,-3358,-3358,-3104,-3104,decade,,lived between 3359 and 3105 BC,radiocarbon (tissue and accompanying materials),unspecified,accepted,high,preferred,,
+otzi,event,-3238,-3238,-3104,-3104,decade,,death: 66% probability between 3239 and 3105 BC,,unspecified,alternative,medium,normal,otzi:death,
+otzi,event,-3358,-3358,-3293,-3293,decade,,death: 33% probability between 3359 and 3294 BC,,unspecified,alternative,low,normal,otzi:death,
+otzi,discovery,1991,1991,1991,1991,day,,discovered on 19 September 1991,,gregorian,accepted,high,normal,,
+otzi,life,-3274,-3274,-3229,-3229,year,,Wikidata P569/P570,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+palmyra,first_record,-1999,-1999,-1700,-1700,century,,documents first mention the city in the early second millennium BCE,,unspecified,accepted,low,normal,,Numeric bounds are a POC reading of 'early second millennium BCE'.
+palmyra,use,201,201,300,300,century,,"by the third century, a prosperous regional center",,unspecified,accepted,medium,normal,,
+palmyra,damage,2015,2015,2015,2015,year,,"captured in 2015 by the Islamic State, which destroyed large parts of the ancient city",,unspecified,accepted,high,normal,,
+parthenon,construction,-446,-446,-431,-431,year,,"begun 447 BC, completed 438 BC, decoration until 432 BC",historical,unspecified,accepted,high,preferred,,
+parthenon,reuse,591,591,600,600,decade,,converted into a church in the final decade of the 6th century AD,,unspecified,accepted,medium,normal,,
+parthenon,construction,-499,-400,-499,-400,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+persepolis,construction,-514,-514,-399,-329,year,,"earliest remains date to 515 BC; extended under Xerxes I, Artaxerxes I and in the 4th century BC, until 330 BC",,unspecified,accepted,high,preferred,,
+persepolis,destruction,-329,-329,-329,-329,year,,taken by Alexander the Great in 330 BC; palaces destroyed by fire,,unspecified,accepted,high,preferred,,
+persepolis,first_record,-508,-508,-508,-508,year,,Wikidata P1249,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+persepolis,construction,-518,-509,-518,-509,decade,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+petra,occupation,-449,-349,106,106,century,circa,Nabataean settlement from the 4th century BC to Roman annexation in 106 AD,,unspecified,accepted,medium,preferred,,Only the Nabataean phase; earlier Edomite (7th c. BC+) and later Roman phases exist but are not modelled.
+petra,construction,-799,-799,-799,-799,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+pompeii,destruction,79,79,79,79,year,,buried in 79 AD,,unspecified,accepted,high,preferred,,The day is disputed; see event:vesuvius-79.
+pompeii,occupation,-699,-499,79,79,century,circa,6th-century BC necropolis and Etruscan inscriptions – 79 AD,,unspecified,accepted,medium,preferred,,Start inferred from excavated 6th-century BC necropolis.
+pompeii,construction,-599,-500,-599,-500,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+pueblo-bonito,construction,850,850,1150,1150,decade,,planned and constructed in stages between AD 850 and AD 1150,,unspecified,accepted,medium,preferred,,
+pueblo-bonito,excavation,1896,1896,1900,1900,year,,"excavations by Wetherill and Pepper, 1896–1900",,unspecified,accepted,high,normal,,
+pyramid-of-djoser,construction,-2699,-2699,-2600,-2600,century,,27th century BC,,unspecified,accepted,medium,preferred,,"Built during the Third Dynasty, in the reign of Djoser (c. 2670–2650 BC per Wikipedia)."
+pyramid-of-djoser,construction,-2639,-2639,-2639,-2639,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+pyramid-of-the-sun,construction,150,250,150,250,century,circa,constructed about 200 AD (first stage),,unspecified,accepted,medium,preferred,,
+pyramids-of-meroe,use,-299,-259,300,400,century,circa,c. 280 BC (royal burials move to Meroë) – 4th century AD,,unspecified,accepted,medium,preferred,,Combines two statements: royal burial ground transferred to Meroë c. 280 BC; the kingdom collapsed in the 4th century AD.
+qumran-caves,discovery,1946,1946,1956,1956,year,,manuscripts found 1946/1947–1956 (11 caves),,unspecified,accepted,high,preferred,,
+rock-hewn-churches-lalibela,construction,1151,1151,1250,1250,century,,late 12th or early 13th century AD (dating given for the Church of Saint George),,unspecified,accepted,low,preferred,,Source dates the best-known church (Bete Giyorgis); applying it to the whole group is a curator generalisation. Wikidata inception (13th century) imported separately.
+rock-hewn-churches-lalibela,construction,1201,1300,1201,1300,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+rosetta-stone,creation,-195,-195,-195,-195,year,,decree issued at Memphis in 196 BC,,unspecified,accepted,high,normal,,
+rosetta-stone,creation,-195,-195,-195,-195,day,,decree dated 4 Xandikos / 18 Mekhir = 27 March 196 BC,,julian,accepted,high,preferred,,Date given in the Macedonian and Egyptian calendars; the Julian-calendar equivalent is as reported by Wikipedia (proleptic Julian assumed).
+rosetta-stone,discovery,1799,1799,1799,1799,month,,found July 1799 by Pierre-François Bouchard,,gregorian,accepted,high,preferred,rosetta:discovery,
+rosetta-stone,discovery,1799,1799,1799,1799,day,,"discovered by chance on August 4, 1799",,gregorian,alternative,low,normal,rosetta:discovery,Conflicts with 'July 1799' (Wikipedia; Dalby 2019). Kept as an alternative; not resolved here.
+rosetta-stone,creation,-195,-195,-195,-195,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+sanchi-stupa,construction,-299,-299,-200,-200,century,,originally commissioned in the 3rd century BCE,,unspecified,accepted,medium,preferred,,
+sanchi-stupa,construction,-99,-99,0,0,century,,four carved toranas and a balustrade added in the 1st century BCE,,unspecified,accepted,medium,normal,,
+sanchi-stupa,use,-299,-299,1100,1100,century,,the complex flourished until the 11th century,,unspecified,accepted,medium,normal,,
+serpent-mound,construction,-349,-249,-349,-249,century,circa,"built in 300 BCE by the Adena peoples (2014 radiocarbon, corroborated 2019)",radiocarbon (2014; corroborated 2019),unspecified,disputed,medium,preferred,serpent-mound:date,"Critique (Lepper): dated material was organic sediment from soil cores, not charcoal from an exposed profile."
+serpent-mound,construction,1020,1120,1020,1120,century,circa,two charcoal samples dated ca. 1070 CE (1991),"radiocarbon (1991, charcoal)",unspecified,disputed,medium,normal,serpent-mound:date,
+serpent-mound,use,1050,1150,1050,1150,century,circa,rebuilt or repaired around 1100 CE during the Fort Ancient period,,unspecified,accepted,medium,normal,,
+siloam-inscription,creation,-799,-799,-700,-700,century,,tunnel and inscription dated to the 8th century BC on the basis of the writing style,palaeography,unspecified,accepted,medium,preferred,,
+siloam-inscription,discovery,1880,1880,1880,1880,year,,found in 1880,,unspecified,accepted,high,normal,,
+skara-brae,occupation,-3179,-3179,-2499,-2499,decade,circa,roughly 3180 BC to around 2500 BC,radiocarbon,unspecified,accepted,high,preferred,,
+skara-brae,construction,-3179,-3179,-3179,-3179,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+stonehenge,construction,-3149,-3049,-1699,-1499,century,circa,phases from about 3100 BC to about 1600 BC,,unspecified,accepted,high,preferred,stonehenge:construction,
+stonehenge,construction,-2599,-2599,-2399,-2399,century,,sarsen circle placed 2600–2400 BC,,unspecified,accepted,high,normal,stonehenge:sarsens,Phase-level extent (sarsen circle).
+stonehenge,construction,-2599,-2599,-2399,-2399,century,,trilithons settled at 2600–2400 cal BC,radiocarbon (cal BC),unspecified,accepted,high,normal,stonehenge:sarsens,
+stonehenge,construction,-2499,-2499,-2499,-2499,century,circa,in about 2500 BC the stones were set up in the centre of the monument,,unspecified,accepted,medium,normal,stonehenge:sarsens,
+stonehenge,construction,-3149,-3049,-3149,-3049,century,circa,earliest phase (circular bank and ditch) dated to about 3100 BC,,unspecified,accepted,medium,normal,stonehenge:earthwork,
+stonehenge,construction,-3049,-2949,-3049,-2949,century,circa,earliest earthwork built about 3000 BC,,unspecified,accepted,medium,normal,stonehenge:earthwork,Institutional rounded date; differs from the c. 3100 BC given by Wikipedia. Both kept.
+stonehenge,construction,-2299,-2299,-2199,-2199,century,circa,central bluestones rearranged '200 or 300 years later' than c. 2500 BC,,unspecified,accepted,low,normal,,Derived arithmetic from the source's wording ('about 2500 BC' + '200 or 300 years later').
+stonehenge,construction,-2399,-2399,-2199,-2199,century,,bluestones in current positions 2400–2200 BC,radiocarbon,unspecified,accepted,medium,normal,,
+stonehenge,construction,-2999,-2900,-2999,-2900,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+stonehenge,construction,-1899,-1800,-1899,-1800,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+sutton-hoo,deposition,610,610,635,635,year,,ship burial dated 610–635 by its Merovingian coins,numismatic,unspecified,accepted,high,preferred,,
+sutton-hoo,discovery,1939,1939,1939,1939,year,,Mound 1 ship burial excavated 1939,,unspecified,accepted,high,normal,,
+taputapuatea-marae,use,1000,,1801,1850,century,after,may have been established as early as AD 1000; abandoned shortly after missionaries arrived in the early 19th century,,unspecified,accepted,low,preferred,,'As early as AD 1000' is a lower bound only; the end bounds are a POC reading of 'early 19th century … shortly thereafter'.
+taputapuatea-marae,construction,1301,1301,1800,1800,century,,expanded and rebuilt at least twice between the 14th and 18th centuries,,unspecified,accepted,medium,normal,,
+taputapuatea-marae,restoration,1994,1994,1994,1994,year,,archaeological remains restored in 1994,,unspecified,accepted,high,normal,,
+tel-dan-stele,creation,-899,-899,-800,-800,century,,generally dated to the 9th century BCE,,unspecified,accepted,medium,preferred,tel-dan:date,
+tel-dan-stele,creation,-869,,,-749,decade,,earliest possible c. 870 BCE; latest 'hardly much later than 750' (Mykytiuk),,unspecified,accepted,medium,normal,tel-dan:date,
+tel-dan-stele,creation,-795,-795,-795,-795,decade,circa,around 796 BCE if by Ben-Hadad III (Athas),,unspecified,alternative,low,normal,tel-dan:date,
+tel-dan-stele,discovery,1993,1993,1994,1994,year,,fragment A found 1993; fragments B1 and B2 in June 1994,,unspecified,accepted,high,normal,,
+tel-megiddo,occupation,-3049,-2949,-331,-331,century,circa,occupied continuously from the early Bronze Age (c. 3000 BCE) to the Persian period (c. 332 BCE),,unspecified,accepted,medium,preferred,megiddo:occupation,
+tel-megiddo,occupation,-4999,-4999,-349,-349,century,circa,inhabited approximately from 5000 to 350 BCE,,unspecified,alternative,medium,normal,megiddo:occupation,
+tel-megiddo,occupation,-6999,-6999,,,millennium,circa,or even since around 7000 BCE (Megiddo Expedition suggestion),,unspecified,alternative,low,normal,megiddo:occupation,Start only.
+tel-megiddo,construction,-3099,-3099,-2900,-2900,century,,Early Bronze IB temple: calibrated dates from the 31st and 30th century BCE,radiocarbon (calibrated),unspecified,accepted,medium,normal,,
+tel-megiddo,construction,-6999,-6999,-6999,-6999,year,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+tell-es-sultan,occupation,-9999,-8999,,,millennium,,"first permanent settlement between 10,000 and 9000 BCE (Natufian)",,unspecified,accepted,medium,preferred,,Open-ended occupation; later phases not modelled in the POC.
+tell-es-sultan,construction,-9599,-9500,-9599,-9500,century,,Wikidata P571,,gregorian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+temple-of-kukulcan,construction,701,701,1200,1200,century,,built sometime between the 8th and 12th centuries CE,,unspecified,accepted,medium,preferred,,
+temple-of-kukulcan,construction,900,900,1000,1000,century,,last construction probably 900–1000 CE (substructure 600–800 CE),,unspecified,accepted,medium,normal,,
+teotihuacan,occupation,-99,-99,550,800,century,circa,established around 100 BCE; monuments burned c. 550 CE; city may have lasted into the 7th–8th centuries,,unspecified,accepted,medium,preferred,,End bounded between the burning of the monuments (c. 550) and the 8th century.
+tikal,occupation,-399,-300,830,,century,,monumental architecture from the 4th century BC; sharp decline after AD 830,,unspecified,accepted,medium,preferred,,Final abandonment date not in retrieved source: latest end open.
+tiwanaku,occupation,50,170,,,decade,,"founded around AD 110 (50–170, 68% probability)",statistical assessment of reliable radiocarbon dates,unspecified,accepted,medium,preferred,tiwanaku:founding,Start only.
+tiwanaku,occupation,-299,,,,century,after,consensus since the 1980s: no older than 200 or 300 BC,,unspecified,accepted,medium,normal,tiwanaku:founding,
+tiwanaku,use,375,375,700,700,century,circa,grew to significance from approximately AD 375 to 700,,unspecified,accepted,medium,normal,,
+tiwanaku,existence,400,400,900,900,year,,Wikidata P580/P582,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+tomb-of-tutankhamun-kv62,use,-1327,-1317,-1327,-1317,year,circa,burial c. 1323 BC,,unspecified,accepted,medium,preferred,,"Derived from the end of Tutankhamun's reign (1332–1323 BC, Wikipedia); the burial date itself is inferred, not directly dated."
+tomb-of-tutankhamun-kv62,discovery,1922,1922,1922,1922,year,,discovered 1922 (Howard Carter),,unspecified,accepted,high,preferred,,
+tower-of-jericho,use,-8299,-8299,-7799,-7799,century,circa,"built around 8300 BCE, in use until c. 7800 BCE",radiocarbon,unspecified,accepted,medium,preferred,jericho-tower:date,
+tower-of-jericho,construction,-8099,-7899,-8099,-7899,century,circa,wall and tower built around 8000 BCE,,unspecified,alternative,medium,normal,jericho-tower:date,Two statements in the same source; the radiocarbon one is ranked preferred.
+tower-of-jericho,construction,-8399,-8199,-8399,-8199,century,circa,dating roughly to 8300 BC,,unspecified,accepted,medium,normal,jericho-tower:date,
+treasury-of-atreus,construction,-1299,-1299,-1249,-1249,decade,,constructed between 1300 and 1250 BCE,,unspecified,accepted,medium,preferred,,
+troy,occupation,-3599,-3599,,,century,circa,first settled around 3600 BC; '4000 years of settlement',,unspecified,accepted,medium,preferred,,End of settlement not captured (open).
+troy,construction,-2999,-2999,-2999,-2999,century,circa,grew into a small fortified city around 3000 BC (Troy I),,unspecified,accepted,medium,normal,,
+troy,construction,-2999,-2999,-2999,-2999,year,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.
+venus-of-willendorf,deposition,-28050,-28050,-28050,-28050,ka,circa,"left in the ground around 30,000 years ago",radiocarbon (surrounding layers),unspecified,accepted,medium,preferred,,"Source states 'years ago'; stored relative to 1950 (POC conversion assumption, not an explicit BP date)."
+venus-of-willendorf,discovery,1908,1908,1908,1908,day,,recovered 7 August 1908,,gregorian,accepted,high,preferred,,
+yinxu,use,-1249,-1249,-1045,-1045,decade,circa,capital during the Late Shang period (c. 1250 – c. 1046 BCE),,unspecified,accepted,medium,preferred,,
+yinxu,discovery,1899,1899,1899,1899,year,,rediscovered in 1899 through oracle bones sold nearby,,unspecified,accepted,high,normal,,
+ziggurat-of-ur,construction,-2099,-2099,-2000,-2000,century,,21st century BC (short chronology),,unspecified,accepted,medium,preferred,,Depends on Mesopotamian chronology choice (short chronology).
+ziggurat-of-ur,restoration,-599,-599,-500,-500,century,,"restored by Nabonidus, 6th century BC",,unspecified,accepted,medium,normal,,
+ziggurat-of-ur,construction,-2099,-2000,-2099,-2000,century,,Wikidata P571,,julian,accepted,medium,normal,,Imported from Wikidata (unreferenced values are common). Numbering/precision interpreted per the 2026-10-01 calibration and Wikidata Help:Dates.

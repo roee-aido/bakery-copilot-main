@@ -1,4 +1,4 @@
-# architecture.md — Bakery Copilot
+# architecture.md — GeoChronos Time-Travel Concierge
 
 The drawing, where each box runs, the limits, and every decision with its reason. Keep it current in the same commit as the change.
 
@@ -9,10 +9,10 @@ The drawing, where each box runs, the limits, and every decision with its reason
  static/index.html  --->  /api/chat  --> agent loop --------------->  Claude API
  app.js, styles.css <---  SSE stream <-- text + tool events          (model, per token)
                              |        \
-                             |         tools: sales_query · lookup_supplier · log_invoice
+                             |         tools: find_sites · site_timeline · sites_in_time_window · check_visit · save_trip_request
                              v
                           Postgres (Railway plugin)  <---  cron service: python -m app.digest (07:30)
-                          users · conversations · messages · runs · invoices · suppliers · sales
+                          users · conversations · messages · runs · trip_requests · sites · site_dates · site_sources
 ```
 
 Four layers, one external dependency. Everything on the left and in the middle is ours and runs on Railway; the model is rented per token.
@@ -20,8 +20,8 @@ Four layers, one external dependency. Everything on the left and in the middle i
 ## Flows
 
 - **Chat turn.** UI posts `{conversation_id, message, image?}` → auth cookie checked → three limits checked → user message saved → system prompt (with today's date and the data range) + last 20 messages + current message → model stream. Text deltas are forwarded to the UI as they arrive. If the model asks for a tool, the backend runs it, appends the result, and calls the model again (max 6 rounds). At the end: one assistant message, one `runs` row with tokens and cost. A dropped connection saves no partial assistant message; the run is marked `aborted`.
-- **Invoice.** The image travels inside the same turn as a content block plus an `image reference` string. The model calls `lookup_supplier`, then `log_invoice` with `source_ref` = that reference. The tool, not the prompt, enforces: duplicate → existing row; unreadable amount → `needs_a_look`; over ₪5,000 → `flagged`.
-- **Digest.** The cron service runs `app/digest.py`: reads yesterday's invoices and runs, prints six lines, POSTs them to `DIGEST_WEBHOOK_URL` if set. `POST /internal/digest` with `X-Cron-Secret` does the same by hand.
+- **Visit request.** The user names a site and a year. The model calls `check_visit`; the tool, not the prompt, compares the year with the site's dating claims and returns a verdict (`fits`, `fits_only_alternative_dating`, `too_early`, `too_late`) with the recorded range, a suggested year and, for a miss, other sites dated to the requested time. The assistant reports the mismatch and the suggestion. Only after the user agrees does the model call `save_trip_request`, which re-validates the date itself: a fit is `confirmed`, a miss is `needs_a_look`, an unknown site is not saved, and the same user, site and year twice is one row.
+- **Digest.** The cron service runs `app/digest.py`: reads yesterday's trip requests and runs, prints five lines, POSTs them to `DIGEST_WEBHOOK_URL` if set. `POST /internal/digest` with `X-Cron-Secret` does the same by hand.
 
 ## Storage
 
@@ -33,10 +33,11 @@ Postgres on Railway (`DATABASE_URL` from the plugin); SQLite locally and in test
 | conversations | id | belongs to one user; title = first message |
 | messages | id | role, text only; `has_image` flag; image bytes are never stored |
 | runs | id | one per model turn: tokens, cost_usd, tool_calls, status, duration |
-| invoices | `source_ref` (unique) · (supplier, invoice_number) | the dedup keys; status logged / needs_a_look; flagged |
-| suppliers | id | seeded from data/suppliers.csv |
-| sales | id | seeded from data/bakery_sales.csv; read-only through `sales_query` |
-| schema_version | version | 1; created with `create_all` at start |
+| trip_requests | id · (logged_by, site_slug, requested_year) deduped in code | status confirmed / needs_a_look; verdict; suggested year |
+| sites | slug (unique) | seeded from data/geochronos_sites.csv; read-only through the tools |
+| site_dates | id · site_slug | one row per dating claim: range, status, confidence, preferred flag, dispute group (data/geochronos_site_dates.csv) |
+| site_sources | id · site_slug | citations (source, url, licence) from data/geochronos_site_sources.csv |
+| schema_version | version | 2; created with `create_all` at start. Legacy bakery tables (sales, suppliers, invoices) may remain in an older database; the code no longer uses them |
 
 ## Model
 
@@ -46,7 +47,7 @@ Postgres on Railway (`DATABASE_URL` from the plugin); SQLite locally and in test
 
 | Layer | Number | Where enforced |
 |---|---|---|
-| Users → us | 30 messages per user per hour; images ≤ 5 MB | `app/limits.py`, before the model is called |
+| Users → us | 30 messages per user per hour | `app/limits.py`, before the model is called |
 | Us → model | SDK retries with backoff on 429/529 (2 retries) | Anthropic SDK client |
 | Us → wallet | $3.00 per local day across the app | `app/limits.py` from the `runs` table |
 | Tool loop | max 6 model rounds per turn; tool results truncated at 12,000 chars | `app/agent.py` |
@@ -80,3 +81,9 @@ One Railway project, three things in it: the **web service**, built by Railway's
 | 2026-10-27 | Railpack build, no Dockerfile | The Dockerfile only pinned Python and ran pip; Railway's default builder does the same from `requirements.txt` and `.python-version`, one file less to keep current | A system package (apt) or a multi-stage build is needed, or Railway drops Railpack |
 | 2026-10-27 | Infrastructure as Code (`.railway/railway.ts`) instead of `railway.json` | Railway deprecated config-as-code files (they stop working on 2026-12-01); one IaC file describes both services, so the cron service needs no config path of its own | Railway changes the IaC format again, or a setting the DSL cannot express |
 | 2026-10-28 | Public repository, history restarted as one commit | No secrets live in the code (they are in Variables) and the dataset is mock data; a fresh history keeps the owner's personal email out, and the old private repo is kept as `bakery-copilot-archive` | Real client data or client-specific configuration has to be committed |
+| 2026-11-08 | Re-purposed the bakery app as the GeoChronos Time-Travel Concierge | Class task: keep the structure, change the use. Real curated data from the author's own research project makes the answers checkable | The records stop being maintained, or the app needs live data |
+| 2026-11-08 | Flat CSV export of GeoChronos, seeded at first start | The app must not depend on the research repo or its build; the export script is reproducible and the CSVs are small | The records change often (then load from an API or a database copy) |
+| 2026-11-08 | Read-only tools plus one validated write, no SQL from the model | Same least-access rule as `sales_query`; the date check lives in code so a wrong year cannot be saved as confirmed | A need for ad-hoc analysis the parameters cannot express |
+| 2026-11-08 | Tools speak signed years (BCE negative, no year 0); storage is astronomical | Avoids the off-by-one at year 0; the model never does year arithmetic | Never; keep one conversion function |
+| 2026-11-08 | Every date reported as range, status and confidence; "not in our records" instead of invention | The source data carries disputed and alternative datings; hiding them would misreport the research | The records gain a single agreed dating for a site |
+| 2026-11-08 | No photo upload in the interface | A site cannot be reliably identified from a photo; the invoice flow is gone | A reason to read photos appears |

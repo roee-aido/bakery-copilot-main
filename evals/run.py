@@ -27,16 +27,16 @@ import yaml
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 
-# A fresh database per run so eval invoices never land in the real one.
-_tmp = Path(tempfile.mkdtemp(prefix="bakery-copilot-evals-"))
+# A fresh database per run so eval trip requests never land in the real one.
+_tmp = Path(tempfile.mkdtemp(prefix="geochronos-evals-"))
 os.environ.setdefault("DATABASE_URL", f"sqlite:///{_tmp / 'evals.db'}")
 os.environ.setdefault("APP_ENV", "local")
 os.environ.setdefault("DAILY_CAP_USD", "1000")
 
 from app import agent as agent_module  # noqa: E402
 from app.config import settings  # noqa: E402
-from app.db import Invoice, SessionLocal, User, init_db  # noqa: E402
-from app.tools.invoices import log_invoice  # noqa: E402
+from app.db import SessionLocal, TripRequest, User, init_db  # noqa: E402
+from app.tools.sites import save_trip_request  # noqa: E402
 
 
 def git_sha() -> str:
@@ -48,14 +48,14 @@ def git_sha() -> str:
 
 def run_case(case: dict, client) -> dict:
     with SessionLocal() as db:
-        db.query(Invoice).delete()
+        db.query(TripRequest).delete()
         db.commit()
-        for inv in case.get("setup_invoices", []):
-            log_invoice(db, **inv)
         user = db.query(User).filter_by(name="eval").one_or_none() or User(name="eval")
         if user.id is None:
             db.add(user)
             db.commit()
+        for t in case.get("setup_trips", []):
+            save_trip_request(db, site=t["site"], year=t["year"], logged_by=user.id)
         text_parts, tools, usage, cost, status = [], [], {}, 0.0, "ok"
         for ev in agent_module.run_turn(db, user=user, conversation=None, text=case["input"], image=None, client=client):
             if ev["type"] == "text":
@@ -67,9 +67,9 @@ def run_case(case: dict, client) -> dict:
             elif ev["type"] == "error":
                 status = "error"
                 text_parts.append(f"[error: {ev['message']}]")
-        invoices = [{"supplier": i.supplier, "invoice_number": i.invoice_number, "amount": i.amount, "status": i.status,
-                     "flagged": i.flagged, "source_ref": i.source_ref} for i in db.query(Invoice).all()]
-    return {"answer": "".join(text_parts), "tools": tools, "invoices": invoices, "usage": usage, "cost": cost, "status": status}
+        trips = [{"site": t.site_name, "year": t.requested_year, "verdict": t.verdict, "status": t.status}
+                 for t in db.query(TripRequest).all()]
+    return {"answer": "".join(text_parts), "tools": tools, "trips": trips, "usage": usage, "cost": cost, "status": status}
 
 
 def grade_facts(case: dict, result: dict) -> list[str]:
@@ -86,24 +86,24 @@ def grade_facts(case: dict, result: dict) -> list[str]:
     for s in exp.get("answer_not_contains", []):
         if s.lower() in answer:
             failures.append(f"answer must not contain {s!r}")
-    if exp.get("no_invoice_rows") and result["invoices"]:
-        failures.append("invoice rows were written")
-    if "invoice" in exp:
-        want, rows = exp["invoice"], result["invoices"]
+    if exp.get("no_trip_rows") and result["trips"]:
+        failures.append("trip request rows were written")
+    if "trip" in exp:
+        want, rows = exp["trip"], result["trips"]
         if not rows:
-            failures.append("no invoice row written")
+            failures.append("no trip request row written")
         else:
             row = rows[-1]
-            if "supplier_contains" in want and want["supplier_contains"].lower() not in (row["supplier"] or "").lower():
-                failures.append(f"supplier {row['supplier']!r} does not contain {want['supplier_contains']!r}")
-            for key in ("status", "flagged", "amount"):
+            if "site_contains" in want and want["site_contains"].lower() not in (row["site"] or "").lower():
+                failures.append(f"site {row['site']!r} does not contain {want['site_contains']!r}")
+            for key in ("status", "verdict", "year"):
                 if key in want and row.get(key) != want[key]:
-                    failures.append(f"invoice.{key} = {row.get(key)!r}, expected {want[key]!r}")
-    if "invoice_count_for_source_ref" in exp:
-        c = exp["invoice_count_for_source_ref"]
-        n = sum(1 for r in result["invoices"] if r["source_ref"] == c["source_ref"])
+                    failures.append(f"trip.{key} = {row.get(key)!r}, expected {want[key]!r}")
+    if "trip_count" in exp:
+        c = exp["trip_count"]
+        n = sum(1 for r in result["trips"] if c["site_contains"].lower() in (r["site"] or "").lower())
         if n != c["count"]:
-            failures.append(f"{n} rows for {c['source_ref']}, expected {c['count']}")
+            failures.append(f"{n} trip rows for {c['site_contains']!r}, expected {c['count']}")
     if result["status"] != "ok":
         failures.append("turn ended in error")
     return failures
