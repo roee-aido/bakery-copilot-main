@@ -178,7 +178,7 @@ class SiteDate(Base):
     precision: Mapped[str | None] = mapped_column(String(20), nullable=True)
     qualifier: Mapped[str | None] = mapped_column(String(20), nullable=True)
     label: Mapped[str | None] = mapped_column(Text, nullable=True)  # the dating as the source expressed it
-    dating_method: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    dating_method: Mapped[str | None] = mapped_column(String(200), nullable=True)
     calendar: Mapped[str | None] = mapped_column(String(40), nullable=True)
     status: Mapped[str] = mapped_column(String(20), index=True)  # accepted | alternative | disputed | needs_verification
     confidence: Mapped[str] = mapped_column(String(10))  # high | medium | low | unknown
