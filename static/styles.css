@@ -1,4 +1,4 @@
-/* Bakery Copilot — Discord-style layout, neon palette. Dark only. */
+/* GeoChronos Time-Travel Concierge — dark, amber and teal. */
 :root {
   --bg-0: #1E1F22;  /* rail / deepest */
   --bg-1: #2B2D31;  /* sidebar */
@@ -10,11 +10,11 @@
   --muted: #949BA4;
   --dim: #80848E;
 
-  --pink: #FF2E88;
-  --violet: #A855F7;
-  --cyan: #00E5FF;
+  --pink: #F5A524;
+  --violet: #8B5CF6;
+  --cyan: #2DD4BF;
   --lime: #B6FF00;
-  --orange: #FF8A00;
+  --orange: #E8590C;
   --yellow: #FFD60A;
   --blurple: #5865F2;
   --red: #F23F43;
@@ -36,7 +36,7 @@ small { color: var(--muted); display: block; font-size: 12px; }
 button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid transparent; background: var(--bg-3); color: var(--ink); padding: 8px 14px; transition: filter .15s, transform .1s, background .15s; }
 button:hover { filter: brightness(1.12); }
 button:active { transform: translateY(1px); }
-button.primary { background: var(--grad-hot); color: #fff; font-weight: 700; box-shadow: 0 6px 18px rgba(255,46,136,.35); }
+button.primary { background: var(--grad-hot); color: #fff; font-weight: 700; box-shadow: 0 6px 18px rgba(245,165,36,.35); }
 button.ghost { background: transparent; color: var(--muted); }
 button.ghost:hover { background: var(--bg-3); color: var(--ink); filter: none; }
 button.wide { width: 100%; }
@@ -62,7 +62,7 @@ button:disabled { opacity: .5; cursor: default; filter: none; box-shadow: none; 
 .brand { display: flex; align-items: center; gap: 12px; padding: 14px 16px; height: 56px; box-shadow: 0 1px 0 var(--bg-0); background: var(--grad); color: #fff; }
 .brand small { color: rgba(255,255,255,.85); font-weight: 600; }
 .brand .dot { width: 30px; height: 30px; border-radius: 10px; background: #fff; display: grid; place-items: center; flex: none; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
-.brand .dot::after { content: "🥐"; font-size: 17px; }
+.brand .dot::after { content: "🕰"; font-size: 17px; }
 .sidebar > .primary { margin: 14px 12px 8px; }
 .conversations { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; padding: 4px 8px 8px; }
 .conversations::before { content: "Conversations"; font-size: 11px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); padding: 10px 8px 6px; }
@@ -113,7 +113,7 @@ button:disabled { opacity: .5; cursor: default; filter: none; box-shadow: none; 
 .empty { color: var(--muted); text-align: center; margin: 70px 24px 0; }
 .empty p { font-size: 18px; font-weight: 700; color: var(--ink); }
 .empty .hint { display: inline-block; margin: 6px; padding: 8px 14px; border-radius: 999px; cursor: pointer; background: var(--bg-1); color: var(--ink); border: 1px solid var(--line); transition: all .15s; }
-.empty .hint:hover { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 16px rgba(255,46,136,.35); }
+.empty .hint:hover { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 16px rgba(245,165,36,.35); }
 
 /* ---------- composer ---------- */
 .composer { display: flex; gap: 10px; padding: 10px 20px 20px; align-items: flex-end; }
@@ -151,3 +151,8 @@ button:disabled { opacity: .5; cursor: default; filter: none; box-shadow: none; 
   .panel { position: fixed; inset: auto 0 0 0; max-height: 60vh; width: auto; }
   .msg { padding: 8px 14px; }
 }
+
+.badge.confirmed { background: rgba(45,212,191,.2); color: var(--cyan); }
+.badge.needs_a_look { background: rgba(245,165,36,.2); color: var(--pink); }
+#trips table { width: 100%; font-size: 13px; }
+

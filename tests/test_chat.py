@@ -2,7 +2,7 @@
 from app import agent as agent_module
 from app.agent import ModelEvent, run_turn
 from app.costs import Usage
-from app.db import Conversation, Invoice, Message, Run, SessionLocal, User
+from app.db import Conversation, Message, Run, SessionLocal, User
 from tests.conftest import read_sse
 
 
@@ -22,57 +22,61 @@ def test_login_required_and_wrong_password(client):
 
 def test_chat_streams_text_and_saves_once(client, db, logged_in, fake):
     fake.turns.append([
-        ModelEvent(type="text", text="Challah sold best "),
-        ModelEvent(type="text", text="last week: 312 units."),
+        ModelEvent(type="text", text="The Great Pyramid is dated "),
+        ModelEvent(type="text", text="to an estimated 2700-2500 BCE."),
         ModelEvent(type="stop", stop_reason="end_turn", usage=Usage(120, 18),
-                   content=[{"type": "text", "text": "Challah sold best last week: 312 units."}]),
+                   content=[{"type": "text", "text": "The Great Pyramid is dated to an estimated 2700-2500 BCE."}]),
     ])
-    r = client.post("/api/chat", json={"message": "What sold best last week?"})
+    r = client.post("/api/chat", json={"message": "When was the Great Pyramid built?"})
     assert r.status_code == 200
     assert r.headers["content-type"].startswith("text/event-stream")
     events = read_sse(r)
     kinds = [e["type"] for e in events]
     assert kinds[0] == "meta" and kinds[-1] == "done"
-    assert "".join(e["text"] for e in events if e["type"] == "text") == "Challah sold best last week: 312 units."
+    assert "".join(e["text"] for e in events if e["type"] == "text") == "The Great Pyramid is dated to an estimated 2700-2500 BCE."
     conv_id = events[0]["conversation_id"]
     msgs = db.query(Message).filter_by(conversation_id=conv_id).order_by(Message.id).all()
     assert [m.role for m in msgs] == ["user", "assistant"]
-    assert msgs[1].content == "Challah sold best last week: 312 units."
+    assert msgs[1].content == "The Great Pyramid is dated to an estimated 2700-2500 BCE."
     run = db.query(Run).filter_by(conversation_id=conv_id).one()
     assert run.status == "ok" and run.input_tokens == 120 and run.output_tokens == 18
     assert events[-1]["cost_usd"] == 0.0  # fake model has no price table
 
 
-def test_tool_loop_logs_invoice_once_even_when_sent_twice(client, db, logged_in, fake):
+def test_tool_loop_runs_the_site_tool_and_sums_both_model_calls(client, db, logged_in, fake):
     tool_turn = [
-        ModelEvent(type="text", text="Reading the invoice. "),
+        ModelEvent(type="text", text="Checking the records. "),
         ModelEvent(type="stop", stop_reason="tool_use", usage=Usage(300, 40), content=[
-            {"type": "text", "text": "Reading the invoice. "},
-            {"type": "tool_use", "id": "tu_1", "name": "log_invoice",
-             "input": {"supplier": "Levi Flour", "invoice_number": "L-2201", "amount": None, "source_ref": "img_fixed"}},
+            {"type": "text", "text": "Checking the records. "},
+            {"type": "tool_use", "id": "tu_1", "name": "site_timeline", "input": {"site": "Great Pyramid of Giza"}},
         ]),
     ]
     final_turn = [
-        ModelEvent(type="text", text="Logged Levi Flour L-2201 — amount unreadable, marked needs a look."),
+        ModelEvent(type="text", text="Estimated 2700-2500 BCE, with a competing radiocarbon dating."),
         ModelEvent(type="stop", stop_reason="end_turn", usage=Usage(420, 30),
-                   content=[{"type": "text", "text": "Logged Levi Flour L-2201 — amount unreadable, marked needs a look."}]),
+                   content=[{"type": "text", "text": "Estimated 2700-2500 BCE, with a competing radiocarbon dating."}]),
     ]
-    fake.turns.extend([tool_turn, final_turn, tool_turn, final_turn])
+    fake.turns.extend([tool_turn, final_turn])
 
-    r1 = client.post("/api/chat", json={"message": "log this invoice please"})
-    e1 = read_sse(r1)
-    tools = [e for e in e1 if e["type"] == "tool"]
-    assert [t["status"] for t in tools] == ["start", "done"] and tools[0]["name"] == "log_invoice"
-    assert "needs_a_look" in tools[1]["summary"]
-    rows = db.query(Invoice).filter_by(source_ref="img_fixed").all()
-    assert len(rows) == 1 and rows[0].status == "needs_a_look"
-
-    r2 = client.post("/api/chat", json={"message": "log this invoice please", "conversation_id": e1[0]["conversation_id"]})
-    e2 = read_sse(r2)
-    assert any(e["type"] == "tool" and e["status"] == "done" and "duplicate" in e["summary"] for e in e2)
-    assert db.query(Invoice).filter_by(source_ref="img_fixed").count() == 1
-    run = db.query(Run).filter_by(conversation_id=e1[0]["conversation_id"]).order_by(Run.id.desc()).first()
+    events = read_sse(client.post("/api/chat", json={"message": "When was the Great Pyramid built?"}))
+    tools = [e for e in events if e["type"] == "tool"]
+    assert [t["status"] for t in tools] == ["start", "done"] and tools[0]["name"] == "site_timeline"
+    assert "Great Pyramid of Giza" in tools[1]["summary"] and "dating claims" in tools[1]["summary"]
+    run = db.query(Run).filter_by(conversation_id=events[0]["conversation_id"]).one()
     assert run.tool_calls == 1 and run.input_tokens == 720  # both model calls of the turn are summed
+
+
+def test_tool_loop_reports_a_site_that_is_not_in_the_records(client, db, logged_in, fake):
+    fake.turns.extend([
+        [ModelEvent(type="stop", stop_reason="tool_use", usage=Usage(100, 10), content=[
+            {"type": "tool_use", "id": "tu_9", "name": "site_timeline", "input": {"site": "Atlantis"}}])],
+        [ModelEvent(type="text", text="Atlantis is not in our records."),
+         ModelEvent(type="stop", stop_reason="end_turn", usage=Usage(150, 10),
+                    content=[{"type": "text", "text": "Atlantis is not in our records."}])],
+    ])
+    events = read_sse(client.post("/api/chat", json={"message": "Take me to Atlantis"}))
+    done = [e for e in events if e["type"] == "tool" and e["status"] == "done"]
+    assert done and "not found" in done[0]["summary"]
 
 
 def test_refusal_is_reported_not_hidden(client, db, logged_in, fake):
@@ -123,5 +127,5 @@ def test_digest_endpoint_needs_secret(client, logged_in):
     assert client.post("/internal/digest").status_code == 401
     r = client.post("/internal/digest", headers={"X-Cron-Secret": "cron-test"})
     assert r.status_code == 200
-    assert r.json()["text"].startswith("Bakery Copilot —")
+    assert r.json()["text"].startswith("GeoChronos Time-Travel Concierge —")
     assert r.json()["sent"] is False

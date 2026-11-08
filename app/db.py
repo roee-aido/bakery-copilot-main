@@ -27,7 +27,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, rela
 
 from .config import ROOT, settings
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # 2: GeoChronos tables (sites, site_dates, site_sources) added next to the legacy bakery tables
 
 
 def utcnow() -> datetime:
@@ -104,17 +104,18 @@ class Supplier(Base):
     currency: Mapped[str] = mapped_column(String(3))
 
 
-class Invoice(Base):
-    __tablename__ = "invoices"
+class TripRequest(Base):
+    """A saved 'visit' request. Demo only: no booking, no payment. Mismatches are kept for a human to look at."""
+
+    __tablename__ = "trip_requests"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    supplier: Mapped[str] = mapped_column(String(120), index=True)
-    invoice_number: Mapped[str | None] = mapped_column(String(60), nullable=True, index=True)
-    amount: Mapped[float | None] = mapped_column(Float, nullable=True)
-    currency: Mapped[str] = mapped_column(String(3), default="ILS")
-    invoice_date: Mapped[date | None] = mapped_column(Date, nullable=True)
-    status: Mapped[str] = mapped_column(String(20), default="logged")  # logged | needs_a_look
-    flagged: Mapped[bool] = mapped_column(Boolean, default=False)  # over the spec threshold
-    source_ref: Mapped[str | None] = mapped_column(String(120), nullable=True, unique=True)  # the dedup key
+    site_slug: Mapped[str | None] = mapped_column(String(120), nullable=True, index=True)
+    site_name: Mapped[str] = mapped_column(String(200))
+    requested_year: Mapped[int] = mapped_column(Integer)  # signed calendar year, BCE negative
+    verdict: Mapped[str] = mapped_column(String(40))  # fits | fits_only_alternative_dating | too_early | too_late | ...
+    suggested_year: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default="confirmed")  # confirmed | needs_a_look
+    traveller: Mapped[str | None] = mapped_column(String(80), nullable=True)
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     logged_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, index=True)
@@ -138,6 +139,64 @@ class Sale(Base):
     unit_price: Mapped[float] = mapped_column(Float)
     line_total: Mapped[float] = mapped_column(Float)
     status: Mapped[str] = mapped_column(String(12), index=True)  # completed | refunded
+
+
+class Site(Base):
+    """One curated item from GeoChronos: a site, structure or object. Read-only through the site tools."""
+
+    __tablename__ = "sites"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    slug: Mapped[str] = mapped_column(String(120), unique=True, index=True)
+    name: Mapped[str] = mapped_column(String(200), index=True)
+    name_he: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    kind: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    function: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    form: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    culture: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    polity: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    period: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    country: Mapped[str | None] = mapped_column(String(200), nullable=True, index=True)
+    places: Mapped[str | None] = mapped_column(String(400), nullable=True)
+    lat: Mapped[float | None] = mapped_column(Float, nullable=True)
+    lon: Mapped[float | None] = mapped_column(Float, nullable=True)
+    location_precision: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    location_role: Mapped[str | None] = mapped_column(String(30), nullable=True)
+
+
+class SiteDate(Base):
+    """One dating claim about a site. Years are astronomical (1 BCE = 0, 2500 BCE = -2499), as in GeoChronos."""
+
+    __tablename__ = "site_dates"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    site_slug: Mapped[str] = mapped_column(ForeignKey("sites.slug"), index=True)
+    role: Mapped[str] = mapped_column(String(30), index=True)  # construction | creation | existence | use | occupation | ...
+    start_earliest: Mapped[float | None] = mapped_column(Float, nullable=True)
+    start_latest: Mapped[float | None] = mapped_column(Float, nullable=True)
+    end_earliest: Mapped[float | None] = mapped_column(Float, nullable=True)
+    end_latest: Mapped[float | None] = mapped_column(Float, nullable=True)
+    precision: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    qualifier: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    label: Mapped[str | None] = mapped_column(Text, nullable=True)  # the dating as the source expressed it
+    dating_method: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    calendar: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    status: Mapped[str] = mapped_column(String(20), index=True)  # accepted | alternative | disputed | needs_verification
+    confidence: Mapped[str] = mapped_column(String(10))  # high | medium | low | unknown
+    rank: Mapped[str] = mapped_column(String(12))  # preferred | normal
+    dispute_group: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    note: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+
+class SiteSource(Base):
+    """A citation behind a site's records: source, link, licence. Never the source text."""
+
+    __tablename__ = "site_sources"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    site_slug: Mapped[str] = mapped_column(ForeignKey("sites.slug"), index=True)
+    source: Mapped[str] = mapped_column(String(200))
+    url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    locator: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    licence: Mapped[str | None] = mapped_column(String(200), nullable=True)
 
 
 # ---------------------------------------------------------------------------
@@ -169,20 +228,74 @@ def get_db():
 # ---------------------------------------------------------------------------
 
 def init_db(bind=None, data_dir: Path | None = None) -> dict:
-    """Create tables, record the schema version, seed reference data if empty."""
+    """Create tables, record the schema version, seed the GeoChronos reference data if empty.
+
+    The legacy bakery tables (sales, suppliers, invoices) are still created so an existing database
+    keeps working, but they are no longer seeded or used by the agent.
+    """
     bind = bind or engine
     data_dir = data_dir or (ROOT / "data")
     Base.metadata.create_all(bind)
-    report = {"schema_version": SCHEMA_VERSION, "suppliers_seeded": 0, "sales_seeded": 0}
+    report = {"schema_version": SCHEMA_VERSION, "sites_seeded": 0, "site_dates_seeded": 0, "site_sources_seeded": 0}
     with Session(bind) as db:
-        if db.scalar(select(func.count()).select_from(SchemaVersion)) == 0:
+        if db.get(SchemaVersion, SCHEMA_VERSION) is None:
             db.add(SchemaVersion(version=SCHEMA_VERSION))
             db.commit()
-        if db.scalar(select(func.count()).select_from(Supplier)) == 0:
-            report["suppliers_seeded"] = _seed_suppliers(db, data_dir / "suppliers.csv")
-        if db.scalar(select(func.count()).select_from(Sale)) == 0:
-            report["sales_seeded"] = _seed_sales(db, data_dir / "bakery_sales.csv")
+        if db.scalar(select(func.count()).select_from(Site)) == 0:
+            report.update(_seed_geochronos(db, data_dir))
     return report
+
+
+def _blank(value: str | None) -> str | None:
+    value = (value or "").strip()
+    return value or None
+
+
+def _float(value: str | None) -> float | None:
+    value = (value or "").strip()
+    return float(value) if value else None
+
+
+def _seed_geochronos(db: Session, data_dir: Path) -> dict:
+    """Load the three GeoChronos CSVs in one transaction: all of it or none of it."""
+    sites_path = data_dir / "geochronos_sites.csv"
+    if not sites_path.exists():
+        return {}
+    with sites_path.open(encoding="utf-8", newline="") as f:
+        sites = [Site(slug=r["site_id"].strip(), name=r["name"].strip(), name_he=_blank(r["name_he"]),
+                      description=_blank(r["description"]), kind=_blank(r["kind"]), function=_blank(r["function"]),
+                      form=_blank(r["form"]), culture=_blank(r["culture"]), polity=_blank(r["polity"]),
+                      period=_blank(r["period"]), country=_blank(r["country"]), places=_blank(r["places"]),
+                      lat=_float(r["lat"]), lon=_float(r["lon"]), location_precision=_blank(r["location_precision"]),
+                      location_role=_blank(r["location_role"])) for r in csv.DictReader(f)]
+    db.add_all(sites)
+    db.flush()
+
+    dates = []
+    dates_path = data_dir / "geochronos_site_dates.csv"
+    if dates_path.exists():
+        with dates_path.open(encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                dates.append(SiteDate(
+                    site_slug=r["site_id"].strip(), role=r["role"].strip(),
+                    start_earliest=_float(r["start_earliest"]), start_latest=_float(r["start_latest"]),
+                    end_earliest=_float(r["end_earliest"]), end_latest=_float(r["end_latest"]),
+                    precision=_blank(r["precision"]), qualifier=_blank(r["qualifier"]), label=_blank(r["label"]),
+                    dating_method=_blank(r["dating_method"]), calendar=_blank(r["calendar"]),
+                    status=r["status"].strip(), confidence=r["confidence"].strip(), rank=r["rank"].strip(),
+                    dispute_group=_blank(r["dispute_group"]), note=_blank(r["note"])))
+    db.add_all(dates)
+
+    cites = []
+    cites_path = data_dir / "geochronos_site_sources.csv"
+    if cites_path.exists():
+        with cites_path.open(encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                cites.append(SiteSource(site_slug=r["site_id"].strip(), source=r["source"].strip(),
+                                        url=_blank(r["url"]), locator=_blank(r["locator"]), licence=_blank(r["licence"])))
+    db.add_all(cites)
+    db.commit()
+    return {"sites_seeded": len(sites), "site_dates_seeded": len(dates), "site_sources_seeded": len(cites)}
 
 
 def _seed_suppliers(db: Session, path: Path) -> int:

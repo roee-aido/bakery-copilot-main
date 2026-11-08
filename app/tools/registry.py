@@ -6,65 +6,107 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from . import invoices, sales
+from . import sites
 
 TOOLS: list[dict[str, Any]] = [
     {
-        "name": "sales_query",
+        "name": "find_sites",
         "description": (
-            "Read-only query over the bakery's sales lines (one row per product per order). "
-            "Use it for any question about revenue, items sold, order counts, best sellers, branches, "
-            "channels or trends. Pick a metric and a grouping; filter by date range (YYYY-MM-DD), branch, "
-            "product or category. Refunded lines are excluded unless include_refunded is true. "
-            "Never guess numbers: if the answer needs data, call this tool."
+            "Search the curated GeoChronos records of ancient sites, structures and objects. Filter by free text "
+            "(name in English or Hebrew, description, place), country, culture or polity, kind (monument, temple, city, "
+            "cave...), function (tomb, temple, fortification...) or period. Returns each match with its location and its "
+            "best one or two dating claims. Use it to find places; use site_timeline for the full dating of one site. "
+            "If nothing matches, the answer is that it is not in our records."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
-                "metric": {"type": "string", "enum": sorted(sales.METRICS), "description": "revenue (ILS), items (units), orders (distinct orders) or avg_order (revenue per order)."},
-                "group_by": {"type": "string", "enum": sorted(sales.GROUP_BY), "description": "none for a single total; product/branch/... for a ranking; day/week/month for a trend."},
-                "date_from": {"type": "string", "description": "inclusive start date YYYY-MM-DD"},
-                "date_to": {"type": "string", "description": "inclusive end date YYYY-MM-DD"},
-                "branch": {"type": "string", "description": "substring match on branch name"},
-                "product": {"type": "string", "description": "substring match on product name"},
-                "category": {"type": "string", "description": "substring match on category (Bread, Pastry, Drinks, Sweet, ...)"},
-                "include_refunded": {"type": "boolean", "default": False},
-                "top_n": {"type": "integer", "minimum": 1, "maximum": 50, "default": 10},
+                "query": {"type": "string", "description": "free text matched against name, Hebrew name, description, place"},
+                "country": {"type": "string", "description": "substring of the country name, e.g. Egypt"},
+                "culture": {"type": "string", "description": "culture or polity, e.g. Minoan, Nabataean"},
+                "kind": {"type": "string", "description": "type of site, e.g. monument, temple, cave, city"},
+                "function": {"type": "string", "description": "what it was for, e.g. tomb, temple, fortification"},
+                "period": {"type": "string", "description": "named period, e.g. Old Kingdom, Bronze Age"},
+                "limit": {"type": "integer", "minimum": 1, "maximum": 50, "default": 15},
             },
-            "required": ["metric", "group_by"],
             "additionalProperties": False,
         },
     },
     {
-        "name": "lookup_supplier",
-        "description": "Look up a supplier by (partial) name in the bakery's supplier list. Returns the canonical name and the items and usual prices we buy from them. Call it before logging an invoice to normalise the supplier name.",
+        "name": "site_timeline",
+        "description": (
+            "Everything we hold about ONE site: description, location, and ALL of its dating claims, including alternative "
+            "and disputed ones, each with its range, dating method, status, confidence and note, plus citations. Always use "
+            "it before stating when something was built or used. Pass the site name or slug. If several sites match it "
+            "returns candidates to choose from; if none, it says the site is not in our records."
+        ),
         "input_schema": {
             "type": "object",
-            "properties": {"name": {"type": "string", "description": "supplier name as written on the invoice"}},
-            "required": ["name"],
+            "properties": {"site": {"type": "string", "description": "site name (English or Hebrew) or slug, e.g. 'Great Pyramid of Giza'"}},
+            "required": ["site"],
             "additionalProperties": False,
         },
     },
     {
-        "name": "log_invoice",
+        "name": "sites_in_time_window",
         "description": (
-            "Record one supplier invoice as one row. Pass the fields exactly as read from the document; "
-            "pass amount as null if you cannot read it with confidence, and the row will be marked needs_a_look. "
-            "Always pass source_ref (the image reference given in the message) so the same invoice is never logged twice. "
-            "Never call this to modify or delete an existing row."
+            "Find sites that have a dating claim whose possible range touches a window of years. Years are ordinary signed "
+            "years: BCE is negative with no year 0 (2500 BCE = -2500, 1 CE = 1, 1200 CE = 1200). relation: 'built' = "
+            "construction or creation claims, 'in_use' = existence, use or occupation claims, 'any' = both. A match is not "
+            "proof the site stood at that time, and sites built earlier with no recorded end are not listed; say so when "
+            "you answer. Optionally filter by country, culture or kind."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
-                "supplier": {"type": "string"},
-                "invoice_number": {"type": ["string", "null"]},
-                "amount": {"type": ["number", "null"], "description": "total amount, numbers only; null if unreadable"},
-                "currency": {"type": "string", "default": "ILS"},
-                "invoice_date": {"type": ["string", "null"], "description": "YYYY-MM-DD"},
-                "source_ref": {"type": ["string", "null"], "description": "the image reference from the message, e.g. img_8f3a2c"},
-                "notes": {"type": ["string", "null"]},
+                "year_from": {"type": "integer", "description": "start of the window, BCE negative"},
+                "year_to": {"type": "integer", "description": "end of the window; omit for a single year"},
+                "relation": {"type": "string", "enum": ["any", "built", "in_use"], "default": "any"},
+                "country": {"type": "string"},
+                "culture": {"type": "string"},
+                "kind": {"type": "string"},
+                "limit": {"type": "integer", "minimum": 1, "maximum": 50, "default": 25},
             },
-            "required": ["supplier", "amount"],
+            "required": ["year_from"],
+            "additionalProperties": False,
+        },
+    },
+    {
+        "name": "check_visit",
+        "description": (
+            "Validate a requested visit: does the year the user wants fit the recorded dating of ONE site? Call it whenever "
+            "the user names both a site and a year (for example 'I want to visit the Great Pyramid around 2550 BC'). Years "
+            "are ordinary signed years, BCE negative with no year 0 (2550 BCE = -2550). Returns a verdict: fits, "
+            "fits_only_alternative_dating, too_early, too_late or no_dating_in_records, the recorded range, a suggested "
+            "year, and for too early/late also other sites dated to the requested time. If the verdict is not 'fits', "
+            "point out the mismatch and propose the suggestion; never confirm an invalid trip."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "site": {"type": "string", "description": "site name (English or Hebrew) or slug"},
+                "year": {"type": "integer", "description": "requested year, BCE negative, e.g. -2550"},
+            },
+            "required": ["site", "year"],
+            "additionalProperties": False,
+        },
+    },
+    {
+        "name": "save_trip_request",
+        "description": (
+            "Save a demo trip request, but ONLY after the user has agreed to a specific site and year (after check_visit). "
+            "It validates the date itself and stores the request as 'confirmed' if it fits the records, or 'needs_a_look' "
+            "if it does not. The same request twice is one row. Nothing is booked or paid. Never call it for a year the "
+            "user has not accepted."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "site": {"type": "string", "description": "site name or slug"},
+                "year": {"type": "integer", "description": "agreed year, BCE negative"},
+                "traveller": {"type": "string", "description": "name the user gave for the trip, optional"},
+            },
+            "required": ["site", "year"],
             "additionalProperties": False,
         },
     },
@@ -77,12 +119,17 @@ MAX_RESULT_CHARS = 12000
 def execute(name: str, tool_input: dict[str, Any], db: Session, *, user_id: int | None = None) -> str:
     """Run one tool and return its result as a JSON string for the model."""
     try:
-        if name == "sales_query":
-            result = sales.sales_query(db, **_clean(tool_input))
-        elif name == "lookup_supplier":
-            result = invoices.lookup_supplier(db, name=str(tool_input.get("name", "")))
-        elif name == "log_invoice":
-            result = invoices.log_invoice(db, logged_by=user_id, **_clean(tool_input))
+        if name == "find_sites":
+            result = sites.find_sites(db, **_clean(tool_input))
+        elif name == "site_timeline":
+            result = sites.site_timeline(db, site=str(tool_input.get("site", "")))
+        elif name == "sites_in_time_window":
+            result = sites.sites_in_time_window(db, **_clean(tool_input))
+        elif name == "check_visit":
+            result = sites.check_visit(db, site=str(tool_input.get("site", "")), year=tool_input.get("year"))
+        elif name == "save_trip_request":
+            result = sites.save_trip_request(db, site=str(tool_input.get("site", "")), year=tool_input.get("year"),
+                                             traveller=tool_input.get("traveller"), logged_by=user_id)
         else:
             result = {"error": f"unknown tool '{name}'"}
     except Exception as exc:  # the loop must survive a bad input; the model sees the error

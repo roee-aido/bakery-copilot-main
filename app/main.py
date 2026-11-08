@@ -1,4 +1,4 @@
-"""Bakery Copilot backend: the API, the static UI, the health check, the digest hook.
+"""GeoChronos Time-Travel Concierge backend: the API, the static UI, the health check, the digest hook.
 
 One service does everything (architecture.md, "Where things run"). The agent
 loop itself lives in agent.py; this file is doors, locks and plumbing.
@@ -21,7 +21,7 @@ from .agent import get_model_client, run_turn
 from .config import ROOT, settings
 from .db import Conversation, Message, SessionLocal, engine, get_db, init_db
 from .digest import build_digest, send_digest
-from .tools.invoices import recent_invoices
+from .tools.sites import recent_trip_requests
 
 
 @asynccontextmanager
@@ -31,7 +31,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Bakery Copilot", version="0.1.0", lifespan=lifespan, docs_url=None, redoc_url=None)
+app = FastAPI(title="GeoChronos Time-Travel Concierge", version="0.1.0", lifespan=lifespan, docs_url=None, redoc_url=None)
 app.mount("/static", StaticFiles(directory=str(ROOT / "static")), name="static")
 
 
@@ -136,7 +136,7 @@ def chat(payload: ChatIn, request: Request, db: Session = Depends(get_db)):
     """One turn. Checks the three limits, then streams the agent's events as SSE."""
     user = auth.current_user(request, db)
     if not payload.message.strip() and payload.image is None:
-        raise HTTPException(400, "Say something or attach an invoice.")
+        raise HTTPException(400, "Say something or ask about a site.")
     limits.check_rate_limit(db, user.id)
     limits.check_daily_cap(db)
     limits.check_upload_size(payload.image.data if payload.image else None)
@@ -164,13 +164,13 @@ def chat(payload: ChatIn, request: Request, db: Session = Depends(get_db)):
 
 
 # ---------------------------------------------------------------------------
-# Invoices, stats, digest
+# Trip requests, stats, digest
 # ---------------------------------------------------------------------------
 
-@app.get("/api/invoices")
-def invoices(request: Request, db: Session = Depends(get_db)):
+@app.get("/api/trip_requests")
+def trip_requests(request: Request, db: Session = Depends(get_db)):
     auth.current_user(request, db)
-    return recent_invoices(db, limit=50)
+    return recent_trip_requests(db, limit=50)
 
 
 @app.get("/api/stats")
