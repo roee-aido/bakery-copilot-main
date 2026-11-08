@@ -114,3 +114,21 @@ def test_save_trip_request_validates_and_dedupes(client, db):
     assert good["saved"] is True and good["status"] in ("confirmed", "needs_a_look")
     assert save_trip_request(db, site="Atlantis", year=-2500)["reason"] == "not_in_records"
     assert len(recent_trip_requests(db)) == 2
+
+
+def test_csv_values_fit_the_column_lengths():
+    """SQLite ignores String(n); Postgres rejects values that are too long. Check the CSVs against the model."""
+    import csv
+    from pathlib import Path
+    data = Path(__file__).resolve().parent.parent / "data"
+    pairs = [(Site, "geochronos_sites.csv", {"slug": "site_id"}),
+             (SiteDate, "geochronos_site_dates.csv", {"site_slug": "site_id"}),
+             (SiteSource, "geochronos_site_sources.csv", {"site_slug": "site_id"})]
+    for model, fname, rename in pairs:
+        rows = list(csv.DictReader(open(data / fname, encoding="utf-8")))
+        for col in model.__table__.columns:
+            limit = getattr(col.type, "length", None)
+            key = rename.get(col.name, col.name)
+            if limit and key in rows[0]:
+                longest = max(len(r[key] or "") for r in rows)
+                assert longest <= limit, f"{model.__name__}.{col.name}: {longest} > {limit}"
