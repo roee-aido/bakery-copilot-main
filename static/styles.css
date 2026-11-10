@@ -41,7 +41,7 @@ button.ghost { background: transparent; color: var(--muted); }
 button.ghost:hover { background: var(--bg-3); color: var(--ink); filter: none; }
 button.wide { width: 100%; }
 button:disabled { opacity: .5; cursor: default; filter: none; box-shadow: none; }
-.kicker { font-size: 11px; letter-spacing: 3px; font-weight: 800; margin: 0 0 6px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.kicker { font-size: 11px; letter-spacing: 1.6px; font-weight: 800; margin: 0 0 6px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .error { color: var(--red); min-height: 1.2em; margin: 8px 0 0; font-size: 14px; }
 
 /* ---------- login ---------- */
@@ -62,9 +62,10 @@ button:disabled { opacity: .5; cursor: default; filter: none; box-shadow: none; 
 .brand { display: flex; align-items: center; gap: 12px; padding: 14px 16px; height: 56px; box-shadow: 0 1px 0 var(--bg-0); background: var(--grad); color: #fff; }
 .brand small { color: rgba(255,255,255,.85); font-weight: 600; }
 .brand .dot { width: 30px; height: 30px; border-radius: 10px; background: #fff; display: grid; place-items: center; flex: none; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
-.brand .dot::after { content: "🕰"; font-size: 17px; }
-.sidebar > .primary { margin: 14px 12px 8px; }
-.conversations { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; padding: 4px 8px 8px; }
+.brand .dot::after { content: "\1F570\FE0F"; font-size: 17px; color: #1b1b26; }
+.sidebar > #new-chat { margin: 14px 16px 8px; width: auto; align-self: stretch; text-align: left; background: var(--bg-3); color: var(--ink); box-shadow: inset 0 0 0 1px var(--bg-4); font-weight: 600; }
+.sidebar > #new-chat:hover { background: var(--bg-4); box-shadow: inset 0 0 0 1px var(--pink); filter: none; }
+.conversations { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; padding: 4px 16px 8px; }
 .conversations::before { content: "Conversations"; font-size: 11px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); padding: 10px 8px 6px; }
 .conversations button { text-align: left; background: transparent; color: var(--muted); padding: 7px 8px 7px 30px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; font-weight: 500; }
 .conversations button::before { content: "#"; position: absolute; left: 10px; top: 6px; color: var(--dim); font-weight: 800; }
@@ -144,7 +145,7 @@ button:disabled { opacity: .5; cursor: default; filter: none; box-shadow: none; 
   .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .sidebar { flex-direction: row; align-items: center; overflow-x: auto; }
   .brand { height: auto; padding: 10px 14px; } .brand small { display: none; }
-  .sidebar > .primary { margin: 8px; width: auto; }
+  .sidebar > #new-chat { margin: 8px; width: auto; align-self: auto; }
   .conversations { flex-direction: row; padding: 8px; } .conversations::before { display: none; }
   .conversations button { max-width: 150px; }
   .sidebar-foot { margin-left: auto; background: transparent; }
